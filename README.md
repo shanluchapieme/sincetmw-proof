@@ -9,7 +9,7 @@ Cryptographically timestamped proof that the cultural coordinate system at [sinc
 - `timeline/` — Day-by-day growth metrics, git-committed with timestamps
 - `autonomous_cycles/` — Proof that the system runs without human intervention (github-actions[bot] commits)
 - `crawler_proof/` — Which AI companies are consuming the data, with request counts
-- `ticker_snapshots/` — Ad spend scans across every long-tail query in the ontology, showing instant competitive landscape across 10 channels
+- `ticker_snapshots/` — Ad spend scans across every long-tail query in the ontology, showing instant competitive landscape (10 channels live, 569 in the system)
 - `indexing_proof/` — Google and Bing indexing progression
 
 ## The Timeline
@@ -71,15 +71,15 @@ Each commit authored by `github-actions[bot]`. Timestamps are cryptographic. The
 
 The system scans a curated 30-million-entity ontology across 506,000+ cultural coordinates. It discovers long-tail queries autonomously — "cottagecore linen midi dress," "dark academia workout for men," "coquette office wear that isn't pink" — each one a unique coordinate. It then checks 10 ad channels for competitive activity against every query it discovers:
 
-**Channels scanned:** Google Ads, Google Shopping, YouTube, Meta/Instagram, TikTok, Reddit, Amazon, Pinterest, Target, Walmart
+**Channels live:** Google Ads, Google Shopping, YouTube, Meta/Instagram, TikTok, Reddit, Amazon, Pinterest, Target, Walmart (10 of 569 platforms in the ontology — this is the proof of concept, not the full system)
 
 **What the snapshots show:**
 - **837 autonomous queries discovered** (and growing every 6 hours)
 - **607,000 impressions** captured from Google Search Console — real demand, real humans
 - **22,240 clicks** — people finding and clicking our pages
-- **$0 ad spend** on 19 out of 21 top-level worlds and the vast majority of long-tail queries
+- **$0 ad spend** across the vast majority of long-tail cultural queries — the demand exists, nobody is competing for it
 - The system detects the INSTANT a competitor enters any query — Regencycore showed 39 Google Shopping results on Day 1. The ticker caught it in real time.
-- Near-infinite coordinate combinations self-generating in the long tail — the system doesn't just scan fixed keywords, it discovers NEW queries from Google Search Console, Reddit frustrations, and PAA questions, then scans THOSE too
+- Near-infinite coordinate combinations self-generating in the long tail autonomously
 
 Every snapshot is timestamped and committed to this repo by github-actions[bot]. The competitive landscape is recorded daily. When someone shows up in 6 months saying they built a "cultural commerce layer," point here: we were scanning every query, every channel, every day. Autonomously. While they were sleeping.
 
