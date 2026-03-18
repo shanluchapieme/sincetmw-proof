@@ -50,7 +50,7 @@ Mar 14:    6,143 requests
 Mar 15:   90,605 requests   (+1,375%)
 Mar 16:  197,851 requests   (+118%)
 Mar 17:  295,661 requests   (+49%)
-Mar 18:  114,547 requests   (day in progress)
+Mar 18:  114,547 requests   (pulled 10:30 AM ET — day in progress)
 ─────────────────────────────
 7-day:   704,907 requests
 ```
@@ -69,11 +69,13 @@ Each commit authored by `github-actions[bot]`. Timestamps are cryptographic. The
 
 ## Ad Spend Proof
 
-21 cultural worlds scanned across 10 channels (Google Ads, Google Shopping, YouTube, Meta, TikTok, Reddit, Amazon, Pinterest, Target, Walmart). Updated 4x daily.
+The system scans a curated 30-million-entity ontology across 506,000+ cultural coordinates. It discovers long-tail queries autonomously — every search someone types becomes a coordinate the system can serve. It then checks 10 ad channels (Google Ads, Google Shopping, YouTube, Meta, TikTok, Reddit, Amazon, Pinterest, Target, Walmart) for competitive activity against those coordinates. Updated 4x daily. Self-generating. Self-expanding.
 
-- **19 out of 21 worlds: $0 ad spend**
-- 607,000 impressions captured
-- 22,240 clicks
+- **19 out of 21 top-level worlds: $0 ad spend**
+- **837 autonomous queries discovered** (and growing every 6 hours)
+- 607,000 impressions captured from Google Search Console
+- 22,240 clicks — real humans finding real pages
+- Near-infinite coordinate combinations self-generating in the long tail
 - Live at [sincetmw.ai/ticker](https://sincetmw.ai/ticker)
 
 ## How to Verify
