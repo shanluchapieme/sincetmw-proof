@@ -1,0 +1,376 @@
+[
+  {
+    "date": "2026-03-17",
+    "timestamp": "2026-03-17T23:54:03.195786+00:00",
+    "total_pages": 505119,
+    "google_indexed": 28,
+    "google_discovered": 361104,
+    "google_impressions": 96,
+    "google_clicks": 1,
+    "bing_indexed": 4,
+    "bing_crawled": 162,
+    "cf_requests_7d": 576368,
+    "cf_bandwidth_gb": 10.29,
+    "total_faq_pairs": 294,
+    "faq_by_source": {
+      "google_search_console": 78,
+      "demand_capture_paa": 56,
+      "demand_capture_related": 112,
+      "google_trends": 31,
+      "demand_capture_exa": 17
+    },
+    "competitor_articles_24h": 46,
+    "competitor_worlds": 8,
+    "paa_questions": 56,
+    "related_searches": 112,
+    "serp_positions": {
+      "dark_academia": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Dark_Academia",
+          "https://en.wikipedia.org \u203a wiki \u203a Dark_academia",
+          "40+ comments \u00b7 1 year ago"
+        ]
+      },
+      "quiet_luxury": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.sumissura.com \u203a en-us \u203a blog \u203a old-money...",
+          "https://www.houseofharveyblog.com \u203a blog \u203a old-mon...",
+          "https://www.pinterest.com \u203a streetstylis \u203a old-money-aes..."
+        ]
+      },
+      "cottagecore": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Cottagecore",
+          "https://www.thespruce.com \u203a ... \u203a More Design Styles",
+          "https://en.wikipedia.org \u203a wiki \u203a Cottagecore"
+        ]
+      },
+      "divine_nine": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aka1908.com",
+          "https://en.wikipedia.org \u203a wiki \u203a Alpha_Kappa_Alpha",
+          "https://akawebnet.aka1908.net \u203a eweb \u203a dynamicpage \u203a s..."
+        ]
+      },
+      "euphoria": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Euphoric",
+          "https://www.pinterest.com \u203a days_inspired \u203a euphoria-a...",
+          "https://www.pinterest.com \u203a roxas629 \u203a euphoria-outfit"
+        ]
+      },
+      "k_beauty": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.allure.com \u203a Skin \u203a shopping",
+          "https://labmuffin.com \u203a Category \u203a Beauty \u203a Skincare",
+          "70+ comments \u00b7 1 year ago"
+        ]
+      },
+      "coquette": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Coquette",
+          "https://www.vogue.com \u203a article \u203a coquette-aesthetic-exp...",
+          "https://www.whowhatwear.com \u203a Fashion \u203a Outfit Ideas"
+        ]
+      },
+      "y2k": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://en.wikipedia.org \u203a wiki \u203a Y2K_aesthetic",
+          "https://aesthetics.fandom.com \u203a wiki \u203a Y2K",
+          "40+ comments \u00b7 1 year ago"
+        ]
+      },
+      "lowrider_chicano": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Chicano_Lowrider",
+          "https://www.pinterest.com \u203a vegastar21 \u203a old-school-lo...",
+          "https://www.pinterest.com \u203a billiesm60 \u203a low-rider-and-..."
+        ]
+      },
+      "southern_gothic": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Southern_Gothic",
+          "76.6K+ followers",
+          "https://en.wikipedia.org \u203a wiki \u203a Southern_Gothic"
+        ]
+      },
+      "china_maxxing": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.npr.org \u203a 2026/03/13 \u203a nx-s1-5743795 \u203a c...",
+          "https://www.cnn.com \u203a 2026/02/25 \u203a asia \u203a chinamaxxi...",
+          "https://en.wikipedia.org \u203a wiki \u203a Becoming_Chinese"
+        ]
+      },
+      "american_sportswear": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.sumissura.com \u203a en-us \u203a blog \u203a old-money...",
+          "https://www.houseofharveyblog.com \u203a blog \u203a old-mon...",
+          "https://www.pinterest.com \u203a streetstylis \u203a old-money-aes..."
+        ]
+      }
+    },
+    "serps_where_present": 0,
+    "serps_total": 12,
+    "sincetmw_serp_visibility": {
+      "queries_where_we_rank": 0,
+      "queries_with_ads": 1,
+      "queries_with_shopping": 1
+    },
+    "reddit_frustrations_24h": 0,
+    "reddit_total_score": 0,
+    "top_competitors": [
+      {
+        "domain": "www.instagram.com",
+        "appearances": 6
+      },
+      {
+        "domain": "www.reddit.com",
+        "appearances": 2
+      },
+      {
+        "domain": "www.nylon.com",
+        "appearances": 2
+      },
+      {
+        "domain": "www.yesstyle.com",
+        "appearances": 2
+      },
+      {
+        "domain": "www.whowhatwear.com",
+        "appearances": 2
+      },
+      {
+        "domain": "www.stylerave.com",
+        "appearances": 2
+      },
+      {
+        "domain": "fashionunited.com",
+        "appearances": 1
+      },
+      {
+        "domain": "ca.lewkin.com",
+        "appearances": 1
+      },
+      {
+        "domain": "thighsociety.ca",
+        "appearances": 1
+      },
+      {
+        "domain": "www.theotheraesthetic.com",
+        "appearances": 1
+      }
+    ],
+    "demand_capture_faqs_today": 168,
+    "demand_capture_articles": 46,
+    "ai_citations": 0
+  },
+  {
+    "date": "2026-03-18",
+    "timestamp": "2026-03-18T19:49:59.345039+00:00",
+    "total_pages": 505119,
+    "google_indexed": 28,
+    "google_discovered": 461104,
+    "google_impressions": 96,
+    "google_clicks": 1,
+    "bing_indexed": 6,
+    "bing_crawled": 531,
+    "cf_requests_7d": 704559,
+    "cf_bandwidth_gb": 12.89,
+    "total_faq_pairs": 349,
+    "faq_by_source": {
+      "unknown": 349
+    },
+    "competitor_articles_24h": 59,
+    "competitor_worlds": 8,
+    "paa_questions": 60,
+    "related_searches": 115,
+    "serp_positions": {
+      "dark_academia": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Dark_Academia",
+          "https://en.wikipedia.org \u203a wiki \u203a Dark_academia",
+          "https://www.pinterest.com \u203a kathrynaesthetics \u203a dark-ac..."
+        ]
+      },
+      "quiet_luxury": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.sumissura.com \u203a en-us \u203a blog \u203a old-money...",
+          "https://aesthetics.fandom.com \u203a wiki \u203a Old_Money",
+          "200+ comments \u00b7 3 years ago"
+        ]
+      },
+      "cottagecore": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Cottagecore",
+          "https://www.thespruce.com \u203a ... \u203a More Design Styles",
+          "335.4K+ followers"
+        ]
+      },
+      "divine_nine": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aka1908.com",
+          "https://en.wikipedia.org \u203a wiki \u203a Alpha_Kappa_Alpha",
+          "190.1K+ followers"
+        ]
+      },
+      "euphoria": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Euphoric",
+          "https://www.pinterest.com \u203a days_inspired \u203a euphoria-a...",
+          "10+ comments \u00b7 1 year ago"
+        ]
+      },
+      "k_beauty": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "70+ comments \u00b7 1 year ago",
+          "https://labmuffin.com \u203a Category \u203a Beauty \u203a Skincare",
+          "https://www.allure.com \u203a Skin \u203a shopping"
+        ]
+      },
+      "coquette": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.vogue.com \u203a article \u203a coquette-aesthetic-exp...",
+          "https://en.wikipedia.org \u203a wiki \u203a Coquette_aesthetic",
+          "https://www.whowhatwear.com \u203a Fashion \u203a Outfit Ideas"
+        ]
+      },
+      "y2k": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Y2K",
+          "https://en.wikipedia.org \u203a wiki \u203a Y2K_aesthetic",
+          "https://www.pinterest.com \u203a Explore \u203a Women's Fashion"
+        ]
+      },
+      "lowrider_chicano": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Chicano_Lowrider",
+          "https://www.pinterest.com \u203a nfinetee \u203a lowrider-art",
+          "https://www.pinterest.com \u203a vegastar21 \u203a old-school-lo..."
+        ]
+      },
+      "southern_gothic": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://aesthetics.fandom.com \u203a wiki \u203a Southern_Gothic",
+          "20+ comments \u00b7 3 years ago",
+          "https://en.wikipedia.org \u203a wiki \u203a Southern_Gothic"
+        ]
+      },
+      "china_maxxing": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.npr.org \u203a 2026/03/13 \u203a nx-s1-5743795 \u203a c...",
+          "https://www.cnn.com \u203a 2026/02/25 \u203a asia \u203a chinamaxxi...",
+          "https://en.wikipedia.org \u203a wiki \u203a Becoming_Chinese"
+        ]
+      },
+      "american_sportswear": {
+        "in_results": false,
+        "position": null,
+        "top_competitors": [
+          "https://www.sumissura.com \u203a en-us \u203a blog \u203a old-money...",
+          "https://aesthetics.fandom.com \u203a wiki \u203a Old_Money",
+          "200+ comments \u00b7 3 years ago"
+        ]
+      }
+    },
+    "serps_where_present": 0,
+    "serps_total": 12,
+    "sincetmw_serp_visibility": {
+      "queries_where_we_rank": 0,
+      "queries_with_ads": 0,
+      "queries_with_shopping": 0
+    },
+    "reddit_frustrations_24h": 0,
+    "reddit_total_score": 0,
+    "top_competitors": [
+      {
+        "domain": "www.instagram.com",
+        "appearances": 5
+      },
+      {
+        "domain": "www.whowhatwear.com",
+        "appearances": 2
+      },
+      {
+        "domain": "fashionunited.com",
+        "appearances": 1
+      },
+      {
+        "domain": "www.reddit.com",
+        "appearances": 1
+      },
+      {
+        "domain": "whimsysoul.com",
+        "appearances": 1
+      },
+      {
+        "domain": "www.theotheraesthetic.com",
+        "appearances": 1
+      },
+      {
+        "domain": "www.nylon.com",
+        "appearances": 1
+      },
+      {
+        "domain": "lewkin.com",
+        "appearances": 1
+      },
+      {
+        "domain": "www.thighsociety.com",
+        "appearances": 1
+      },
+      {
+        "domain": "www.womanandhome.com",
+        "appearances": 1
+      }
+    ],
+    "demand_capture_faqs_today": 55,
+    "demand_capture_articles": 59,
+    "ai_citations": 0
+  }
+]

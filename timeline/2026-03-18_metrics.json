@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-03-18T20:49:12.665474+00:00",
+  "date": "2026-03-18",
+  "total_pages": 505119,
+  "google": {
+    "pages_indexed": 28,
+    "pages_discovered": 461104,
+    "total_impressions": 96,
+    "total_clicks": 1
+  },
+  "bing": {
+    "pages_indexed": 6,
+    "total_crawled": 531
+  },
+  "cloudflare": {
+    "requests_24h": 115774,
+    "page_views_24h": 114786,
+    "bandwidth_gb": 12.9,
+    "unique_visitors": 4000,
+    "requests_7d": 706134,
+    "daily_breakdown": {
+      "2026-03-11": {
+        "requests": 17,
+        "page_views": 0,
+        "uniques": 10
+      },
+      "2026-03-12": {
+        "requests": 83,
+        "page_views": 0,
+        "uniques": 26
+      },
+      "2026-03-14": {
+        "requests": 6143,
+        "page_views": 5643,
+        "uniques": 842
+      },
+      "2026-03-15": {
+        "requests": 90605,
+        "page_views": 86958,
+        "uniques": 1006
+      },
+      "2026-03-16": {
+        "requests": 197851,
+        "page_views": 185346,
+        "uniques": 757
+      },
+      "2026-03-17": {
+        "requests": 295661,
+        "page_views": 294693,
+        "uniques": 614
+      },
+      "2026-03-18": {
+        "requests": 115774,
+        "page_views": 114786,
+        "uniques": 745
+      }
+    },
+    "source": "cloudflare_graphql",
+    "error": null
+  }
+}
