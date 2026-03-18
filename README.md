@@ -1,5 +1,21 @@
 # Since Tomorrow — Proof of Work
 
+### These aren't URLs. They're coordinates.
+
+`/aesthetics/80s-nostalgia;retro;vintage;normcore;heritage;camp;americana`
+
+30M cultural entities x 504,472 coordinates = 15.1 trillion possible cultural intersections.
+
+Each semicolon is a dimension. Each dimension is a cultural signal. Each URL is a point in that space that no other system has mapped — and Bing accepted every single one as a legitimate document on day 3.
+
+You can't reverse-engineer these from a trend report. You can't buy them from WGSN. You can't scrape them from Pinterest. They exist because someone mapped the intersection of a film aesthetic, a fandom behavior, and a content community — and encoded them all as coordinates.
+
+No competitor can submit these URLs. Because no competitor built what generates them.
+
+**It's not a website. It's the new world map.**
+
+---
+
 Cryptographically timestamped proof that the cultural coordinate system at [sincetmw.ai](https://sincetmw.ai) exists, operates autonomously, and is being consumed by the world's largest AI companies.
 
 **No code. No algorithms. No API keys. Just receipts.**
