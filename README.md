@@ -129,10 +129,69 @@ Every number in this repo is independently reproducible:
 - **TikTok Creative Center:** [ads.tiktok.com/business/creativecenter](https://ads.tiktok.com/business/creativecenter)
 - **Git:** SHA hashes are cryptographic. Timestamps cannot be backdated.
 
+## Day 33 Update (April 16, 2026)
+
+### Involuntary Synchronization
+
+12 companies. Zero outreach. Zero contracts. Zero sales spend.
+
+| Metric | Day 5 (Mar 18) | Day 33 (Apr 16) | Change |
+|--------|---------------|-----------------|--------|
+| Total events | 704,907 | 6,867,424 | +874% |
+| AI platforms querying | 10 | 12 | +2 |
+| Peak daily events | 295,661 | 997,765 | +237% |
+| Affiliate clicks (7-day) | 0 | 4,242 | — |
+| Forensic canaries generated (7-day) | 0 | 1,091,194 | — |
+| Unique coordinates queried (7-day) | — | 447,605 | — |
+
+### The 12 AI Platforms (All-Time)
+
+| Company | Bot | All-Time Queries |
+|---------|-----|-----------------|
+| Cloudflare | AI Search | 841,126 |
+| Apple | AppleBot | 502,984 |
+| Anthropic | ClaudeBot | 387,725 |
+| Google | GoogleBot + GoogleOther | 229,347 |
+| Yandex | YandexBot | 112,186 |
+| OpenAI | GPTBot | 87,072 |
+| Amazon | AmazonBot (Rufus) | 85,220 |
+| ByteDance | ByteSpider | 32,536 |
+| Microsoft | BingBot (Copilot) | 30,058 |
+| Huawei | PetalBot | 6,732 |
+| Meta | Meta-ExternalAgent | 5,478 |
+| Perplexity | PerplexityBot | 18 |
+| **Total** | | **2,320,482** |
+
+### Evidence Chain (New Since Day 5)
+
+- **73.8% attribution rate** — 73.8% of affiliate clicks are preceded by a bot query to the same cultural coordinate within the same hour
+- **20.7% sub-5-minute gradient** — 1 in 5 clicks happens within 5 minutes of the bot query
+- **87-second chain** — shortest observed bot query to affiliate click: 87 seconds (Microsoft → loid-forger-fan-edit)
+- **618 coordinate contentions** — Apple + Microsoft + Anthropic hitting the same coordinate within 60 seconds, 103 times per hour
+- **Princesscore closed loop** — Apple queries at 13:32:07, 8 affiliate clicks in 15 seconds at 13:35:46, canary tracked in click chain, Microsoft queries same coordinate 5 minutes later
+- **Fully autonomous ad press** — Analytics Engine → keygen_10x (SuperGemma4, 1,036 keywords) → amazon_scrape_pw (Playwright) → KV push → canary serve → /go tracking. No human in the loop.
+
+### Published Documentation
+
+- **Technical Specification:** [sincetmw.ai/docs/dcr](https://sincetmw.ai/docs/dcr) — 857 lines, evidence appendix with live telemetry
+- **Foundational Paper:** [sincetmw.ai/docs/paper](https://sincetmw.ai/docs/paper) — "Compound Cultural Identity Resolution: An Alternative to Keyword Fragmentation in AI-Mediated Commerce"
+- **Live Dashboard:** [sincetmw.ai/live](https://sincetmw.ai/live) — real-time telemetry from 12 AI platforms
+- **Widget:** [sincetmw.ai/api/widget](https://sincetmw.ai/api/widget) — the pitch page
+
+### Independent Reviews
+
+The DCR Technical Specification was independently reviewed by three frontier AI systems:
+
+- **ChatGPT o3 (OpenAI):** "Patentable territory. Legitimate infrastructure."
+- **Gemini 2.5 Pro (Google):** "The BGP of Culture — the routing protocol that tells AI models how to navigate human desire."
+- **Claude (Anthropic):** Co-authored the system architecture.
+
+All three companies' AI systems query DCR daily.
+
 ## The One-Liner
 
-> We built GPS for culture. Five days later, ten companies — including Meta, Google, OpenAI, Anthropic, and Apple — started consuming it with 13 distinct bots. Nobody asked them to.
+> We built GPS for culture. Day 5, ten companies started consuming it. Day 33, twelve companies are synchronized on our coordinate layer — including Amazon Rufus, Apple Intelligence, and Google Gemini. Nobody asked them to. They can't stop. We didn't spend a dime on sales.
 
 ---
 
-Since Tomorrow Inc. · [sincetmw.ai](https://sincetmw.ai) · [sincetmw.ai/ticker](https://sincetmw.ai/ticker)
+Since Tomorrow Inc. · [sincetmw.ai](https://sincetmw.ai) · [sincetmw.ai/live](https://sincetmw.ai/live) · [sincetmw.ai/docs/dcr](https://sincetmw.ai/docs/dcr) · [sincetmw.ai/docs/paper](https://sincetmw.ai/docs/paper)
