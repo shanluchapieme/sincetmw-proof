@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Since Tomorrow — We Recompiled the Market</title>
+<style>
+  :root{
+    --bg:#0a0a0c; --panel:#131317; --panel-2:#1a1a20; --border:#26262e;
+    --text:#e8e8ea; --muted:#c49a94; --dim:#8a5a54;
+    --accent:#FF0000;
+    --accent-2:#FF3B30;
+    --st-border:#7a1a1a;
+    --st-bg-from:#2a0808;
+    --st-bg-to:#160404;
+    --st-q:#ffd0c8;
+    --st-tag:#c86055;
+    --live:#34d8c1;
+    --doc:#e7bd5d;
+    --stop:#f06b55;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+
+  /* ── MANIFESTO HEADER ─────────────────────────────── */
+  header{max-width:1200px;margin:0 auto;padding:80px 40px 48px;border-bottom:1px solid var(--border)}
+  header .eyebrow{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-family:ui-monospace,monospace;margin-bottom:18px}
+  header h1{font-size:clamp(34px,5vw,60px);font-weight:800;letter-spacing:-0.035em;line-height:1.05;margin-bottom:16px;color:#fff}
+  header h1 span{color:var(--accent);text-shadow:0 0 30px rgba(255,0,0,0.35)}
+  header .lede{font-size:17px;color:var(--muted);line-height:1.75;max-width:900px;margin-bottom:32px}
+  header .lede strong{color:#fff}
+
+  /* ── ECONOMIC ESTATE STRIP ────────────────────────── */
+  .estate-strip{border:1px solid var(--border);background:#0d0d0c;border-radius:10px;padding:18px 20px;margin-bottom:36px;max-width:1000px}
+  .estate-label{font:800 10px ui-monospace,monospace;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  .estate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px 24px}
+  .estate-item{display:flex;flex-direction:column;gap:6px}
+  .estate-k{font:800 9px ui-monospace,monospace;color:var(--dim);letter-spacing:.12em;text-transform:uppercase}
+  .estate-v{font:800 22px ui-monospace,monospace;color:#fff;letter-spacing:-.02em}
+  .estate-note{margin-top:16px;font:11px ui-monospace,monospace;color:var(--dim);line-height:1.7;letter-spacing:.02em}
+
+  .manifesto-block{margin-bottom:32px;max-width:1000px}
+  .manifesto-block p{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:14px}
+  .manifesto-block p strong{color:#fff}
+
+  .ask-list{list-style:none;margin:24px 0;max-width:1000px}
+  .ask-list li{font-size:16px;color:var(--muted);line-height:1.9;padding-left:0}
+  .ask-list li strong{color:#fff;font-weight:700}
+  .ask-list li .verb{color:var(--accent);font-weight:700}
+
+  .questions-headline{font-size:clamp(24px,3vw,34px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.2;margin:32px 0 18px;max-width:1000px}
+  .questions-headline span{color:var(--accent)}
+
+  .fragment-inline{font-size:16px;color:var(--muted);line-height:2;max-width:1000px;margin-bottom:22px}
+  .fragment-inline strong{color:#fff}
+
+  .one-market{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.25;margin:40px 0 22px;text-transform:uppercase}
+  .one-market span{color:var(--accent);text-shadow:0 0 20px rgba(255,0,0,0.3)}
+
+  .negation{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:10px;max-width:1000px}
+  .negation strong{color:#fff}
+
+  .computation{font-size:clamp(20px,2.4vw,26px);font-weight:800;color:#fff;letter-spacing:-.015em;line-height:1.35;margin:20px 0 30px;max-width:1000px}
+  .computation span{color:var(--accent-2)}
+
+  .what-it-sees{font-size:16px;color:var(--muted);line-height:2;max-width:1000px;margin-bottom:32px}
+  .what-it-sees .step{color:#fff;font-weight:600}
+
+  .chain-long{font-family:ui-monospace,monospace;font-size:13.5px;color:var(--accent-2);background:rgba(255,0,0,0.08);border:1px solid var(--st-border);padding:16px 18px;border-radius:8px;line-height:1.7;letter-spacing:.02em;margin-bottom:28px;max-width:1000px}
+
+  /* ── POLARITY BLOCK ───────────────────────────────── */
+  .polarity-note{
+    max-width:1000px;
+    margin:0 0 36px;
+    padding:22px 24px 20px;
+    border:1px solid var(--border);
+    border-left:2px solid var(--accent);
+    background:#0d0d0c;
+    border-radius:10px;
+  }
+  .polarity-head{
+    font:800 10.5px ui-monospace,monospace;
+    color:var(--accent);
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .polarity-note p{
+    font-size:15px;
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:13px;
+  }
+  .polarity-note p:last-child{margin-bottom:0}
+  .polarity-note p strong{color:#fff;font-weight:700}
+  .polarity-note p em{color:var(--accent-2);font-style:normal;font-weight:700}
+
+  .what-question{font-size:clamp(22px,2.8vw,32px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.3;margin:44px 0 30px;max-width:1000px}
+  .what-question span{color:var(--accent);text-shadow:0 0 20px rgba(255,0,0,0.3)}
+
+  .reframe{font-size:17px;color:var(--muted);line-height:1.8;max-width:1000px;margin-bottom:14px}
+  .reframe strong{color:#fff}
+
+  .coord{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--accent-2);background:rgba(255,0,0,0.08);border:1px solid var(--st-border);padding:10px 14px;border-radius:8px;display:inline-block;letter-spacing:.02em;margin-top:14px}
+
+  /* ── REPLAY BAR ───────────────────────────────────── */
+  .query-wrap{margin-top:36px;padding-top:28px;border-top:1px solid var(--border);max-width:1000px}
+  .query-label{font:800 11px ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .querybar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0;max-width:1000px}
+  .querybar input{background:#0c0c0b;border:1px solid var(--border);border-right:0;color:#fff;padding:16px 18px;font-size:16px;outline:0;font-family:inherit}
+  .querybar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,0,0,.12)}
+  .querybar .btn-ask{background:var(--accent);border:1px solid var(--accent);color:#fff;padding:16px 24px;font:800 11px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:filter .15s}
+  .querybar .btn-ask:hover{filter:brightness(1.1)}
+  .query-coord{margin-top:12px;font:10px ui-monospace,monospace;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;line-height:1.7}
+  .query-coord.warn{color:var(--doc)}
+  .query-mode{margin-top:8px;font:800 10px ui-monospace,monospace;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .query-mode b{color:var(--live)}
+
+  /* ── FILTERS ──────────────────────────────────────── */
+  .filters{max-width:1600px;margin:0 auto;padding:20px 32px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);z-index:100}
+  .chip{background:var(--panel);border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit}
+  .chip:hover{color:var(--accent-2);border-color:#7a1a1a}
+  .chip.active{background:var(--accent);color:#ffffff;border-color:var(--accent);box-shadow:0 0 12px rgba(255,0,0,0.4)}
+  .chip.action{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px}
+  .chip.action:hover{border-color:var(--accent);color:var(--accent)}
+  .filters .spacer{flex:1}
+  .filters .count{font-size:12px;color:var(--dim);font-family:ui-monospace,monospace}
+
+  /* ── 17-FIELD RULER ─────────────────────────────── */
+  .ruler-wrap{max-width:1600px;margin:0 auto;padding:32px 32px 0}
+  .ruler-head{display:grid;grid-template-columns:1fr minmax(280px,.42fr);gap:28px;align-items:end;margin-bottom:16px}
+  .ruler-head .step{font:800 11px ui-monospace,monospace;color:var(--accent);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+  .ruler-head h2{font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#fff;margin:0}
+  .ruler-head p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.6}
+  .ruler{display:grid;grid-template-columns:repeat(17,minmax(72px,1fr));gap:5px;overflow-x:auto;padding-bottom:6px}
+  .rcell{min-height:82px;border:1px solid var(--border);background:#0d0d0c;padding:9px 8px;display:flex;flex-direction:column;justify-content:space-between;border-radius:6px;position:relative}
+  .rcell .n{font:800 9px ui-monospace,monospace;color:var(--dim);letter-spacing:.06em}
+  .rcell b{font-size:10.5px;line-height:1.2;color:#fff;font-weight:700}
+  .rcell .s{font:8px ui-monospace,monospace;color:#706960;text-transform:uppercase;letter-spacing:.08em}
+  .rcell.live{border-color:#1f6e61;background:#0c1714}
+  .rcell.live .s{color:var(--live)}
+  .rcell.doc{border-color:#625020;background:#161309}
+  .rcell.doc .s{color:var(--doc)}
+  .rcell.stop{border-color:#69291f;background:#180d0a}
+  .rcell.stop .s{color:var(--stop)}
+  .rcell.n1::after{content:"N=1";position:absolute;top:4px;right:5px;font-size:8px;font-weight:800;color:var(--accent-2);font-family:ui-monospace,monospace;letter-spacing:.04em;opacity:.85}
+
+  .ruler-legend{font-size:10px;color:var(--dim);font-family:ui-monospace,monospace;letter-spacing:.06em;margin-top:8px;line-height:1.7}
+  .ruler-legend .n1-key{color:var(--accent-2);font-weight:700}
+
+  /* ── LANES ────────────────────────────────────────── */
+  main{max-width:1600px;margin:0 auto;padding:32px;display:flex;flex-direction:column;gap:22px}
+  .lane{display:block;border:1px solid var(--border);background:var(--panel);border-radius:12px;overflow:hidden}
+  .lane.poc{border-left:2px solid var(--accent)}
+  .lane.hidden{display:none}
+  .lane-strip{display:grid;grid-template-columns:repeat(17,minmax(36px,1fr));gap:3px;padding:10px 14px;background:#0b0b0a;border-bottom:1px solid var(--border);overflow-x:auto}
+  .seg{height:28px;border:1px solid #24211e;background:#10100f;display:flex;align-items:center;justify-content:center;font:800 8px ui-monospace,monospace;color:#4f4b45;border-radius:4px;letter-spacing:.06em}
+  .seg.live{background:#0d1916;border-color:#275c52;color:var(--live)}
+  .seg.doc{background:#17140c;border-color:#604d21;color:var(--doc)}
+  .seg.stop{background:#1b0e0b;border-color:#652a20;color:#ff8d78}
+  .seg.unknown{color:#5f5a54}
+  .lane-body{display:grid;grid-template-columns:320px 1fr 400px;gap:0;align-items:stretch}
+  @media(max-width:1200px){.lane-body{grid-template-columns:1fr}}
+  .lane-id{padding:32px 26px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,0.01)}
+  .lane-num{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.14em;font-family:ui-monospace,monospace}
+  .lane-name{font-size:18px;font-weight:800;letter-spacing:-.015em;line-height:1.22;color:#fff;margin-bottom:4px}
+  .lane-stat{font-size:11px;color:var(--dim);font-family:ui-monospace,monospace;margin-bottom:8px}
+  .lane-receipt-status{font-size:10px;color:var(--muted);font-family:ui-monospace,monospace;letter-spacing:.06em;margin-top:-4px;margin-bottom:4px}
+  .lane-receipt-status.poc{color:var(--accent-2)}
+  .lane-section-label{font-size:9.5px;font-weight:800;color:var(--dim);letter-spacing:.16em;font-family:ui-monospace,monospace;margin-top:8px}
+  .lane-measure{font-size:12.5px;color:var(--muted);line-height:1.55}
+  .lane-grid{padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px;align-content:start;background:var(--bg)}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:pointer;transition:all .2s;color:inherit;min-height:126px;justify-content:center;position:relative;overflow:hidden}
+  .card:hover{background:var(--panel-2);border-color:rgba(255,0,0,0.5);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.6)}
+  .card.live{border-color:#1f6e61}
+  .card.doc{border-color:#625020}
+  .card.stop{border-color:#69291f}
+
+  /* ── Bulletproof logo box ─────────────────────────── */
+  .logo-box{
+    position:relative;
+    width:52px;height:52px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:4px;
+    overflow:hidden;
+  }
+  .logo-box .mono{
+    position:absolute;
+    inset:4px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#2a2a32,#16161b);
+    border-radius:7px;
+    font-size:12px;font-weight:800;letter-spacing:-.02em;
+    color:#c8c8d0;font-family:ui-monospace,monospace;
+    z-index:1;
+    transition:opacity .15s;
+  }
+  .logo-box .logo-img{
+    position:relative;
+    z-index:2;
+    width:100%;height:100%;
+    object-fit:contain;
+    display:block;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+  }
+  .card-name{font-size:11px;font-weight:600;line-height:1.25;letter-spacing:-.01em;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .card-state-badge{margin-top:8px;padding:3px 7px;border:1px solid var(--border);border-radius:4px;font:800 8px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);background:#0e0e0d}
+  .card.live .card-state-badge{color:var(--live);border-color:#285d53}
+  .card.doc .card-state-badge{color:var(--doc);border-color:#5b4b23}
+  .card.stop .card-state-badge{color:var(--stop);border-color:#66291f}
+  .answer-inline{display:none;margin-top:11px;border-top:1px solid var(--border);padding-top:10px;font-size:10px;line-height:1.5;color:#c5beb4;text-align:left;width:100%}
+  body.openAll .answer-inline{display:block}
+  .answer-inline .lab{font:800 8px ui-monospace,monospace;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+  .answer-inline.empty{color:var(--dim);font-style:italic}
+
+  .lane-st{padding:32px 26px;background:linear-gradient(180deg,var(--st-bg-from) 0%,var(--st-bg-to) 100%);border-left:1px solid var(--st-border);display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .st-q{font-size:14.5px;font-weight:700;color:#fff;line-height:1.5;letter-spacing:-.005em}
+  .st-detail{font-size:13px;color:var(--st-q);line-height:1.7;font-weight:500}
+  .st-detail .frag{display:block}
+  .st-closer{font-size:13.5px;font-weight:800;color:var(--accent-2);line-height:1.5;margin-top:6px;letter-spacing:-.005em}
+  .lane-st.boundary{padding:32px 26px;gap:18px}
+  .boundary-block{display:flex;flex-direction:column;gap:6px}
+  .boundary-question{font-size:12.5px;color:var(--st-q);line-height:1.6;font-weight:500}
+  .boundary-question .q{display:block}
+  .boundary-note{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:8px;font-style:italic}
+  .boundary-divider{background:var(--accent);color:#fff;font-weight:900;letter-spacing:.08em;font-size:12.5px;line-height:1.35;padding:14px 16px;border-radius:6px;text-align:center;box-shadow:0 0 24px rgba(255,0,0,0.45);margin:6px 0}
+  .boundary-since{font-size:13px;color:#fff;font-weight:700;line-height:1.55;letter-spacing:-.005em}
+  .boundary-difference{border-top:1px solid var(--st-border);padding-top:14px;margin-top:4px;font-size:12.5px;color:var(--st-q);line-height:1.65}
+  .boundary-difference strong{color:var(--accent-2);font-weight:800}
+
+  /* ── CONSTITUTION LINE ───────────────────────────── */
+  .constitution-line{max-width:820px;margin:56px auto 0;padding:0 40px;text-align:center;font-family:ui-monospace,monospace;font-size:12px;color:var(--muted);letter-spacing:.05em;line-height:1.8}
+
+  /* ── CLOSING MANIFESTO ────────────────────────────── */
+  .closing{max-width:1200px;margin:80px auto 0;padding:64px 40px 32px;border-top:1px solid var(--border);text-align:center}
+  .closing .setup{font-size:clamp(16px,1.6vw,20px);font-weight:700;color:var(--muted);letter-spacing:-.005em;line-height:1.5;max-width:800px;margin:0 auto 18px}
+  .closing .thesis{font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1.15;max-width:900px;margin:0 auto}
+  .closing .thesis span{color:var(--accent);text-shadow:0 0 30px rgba(255,0,0,0.35)}
+  .closing .kicker{font-size:14px;color:var(--dim);font-family:ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;margin-top:28px}
+
+  /* ── DRAWER ───────────────────────────────────────── */
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.8);opacity:0;pointer-events:none;transition:opacity .2s;z-index:200;backdrop-filter:blur(8px)}
+  .drawer-backdrop.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;width:min(560px,100vw);height:100vh;background:var(--panel);border-left:1px solid var(--border);padding:40px 32px;transform:translateX(100%);transition:transform .3s;z-index:201;overflow-y:auto;box-shadow:-16px 0 48px rgba(0,0,0,0.9)}
+  .drawer.open{transform:translateX(0)}
+  .drawer h3{font-size:24px;margin-bottom:4px;letter-spacing:-.02em;font-weight:800}
+  .drawer .domain{font-family:ui-monospace,monospace;font-size:13px;color:var(--muted);margin-bottom:20px;display:block}
+  .drawer .row{padding:16px 0;border-top:1px solid var(--border);font-size:13.5px;line-height:1.65}
+  .drawer .row .k{display:block;font-size:10px;font-weight:800;color:var(--dim);letter-spacing:.14em;font-family:ui-monospace,monospace;margin-bottom:6px}
+  .drawer .row.contrast{border-top-color:var(--st-border);background:rgba(255,0,0,0.06);padding:18px 14px;margin:4px -14px;border-radius:8px;border:1px solid var(--st-border)}
+  .drawer .row.contrast .v{color:#fff;font-weight:500}
+  .drawer .row.contrast .v strong{color:var(--accent-2)}
+  .drawer .row.query-echo{background:#0d0d0c;border:1px solid var(--border);padding:14px;margin:4px -14px;border-radius:8px}
+  .drawer .row.query-echo .v{font-size:15px;color:#fff;margin-top:6px;line-height:1.4}
+  .drawer .row.answer{border-top-color:var(--st-border);background:#190e0b;padding:18px 14px;margin:4px -14px;border-radius:8px;border:1px solid var(--st-border)}
+  .drawer .row.answer .k{color:var(--accent-2)}
+  .drawer .row.answer .v{color:#f0ded9;font-size:14px;line-height:1.55}
+  .drawer .row.answer .v.empty{color:var(--doc);font-style:italic}
+  .drawer-fields{display:grid;grid-template-columns:repeat(17,1fr);gap:3px;margin-top:10px}
+  .drawer-fields .seg{height:26px}
+  .drawer .close{position:absolute;top:28px;right:28px;background:transparent;border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .drawer .close:hover{color:var(--accent);border-color:var(--accent);background:var(--panel-2)}
+
+  /* ── OPERATOR MODAL ─────────────────────────────── */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:250;display:none;align-items:center;justify-content:center;padding:22px;backdrop-filter:blur(8px)}
+  .modal.open{display:flex}
+  .modal-box{width:min(920px,100%);background:var(--panel);border:1px solid var(--border);padding:26px;border-radius:12px}
+  .modal-box .k{font:800 11px ui-monospace,monospace;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+  .modal-box h2{font-size:22px;font-weight:800;letter-spacing:-.02em;color:#fff;margin-bottom:14px}
+  .modal-box textarea{width:100%;height:400px;background:#090908;border:1px solid var(--border);color:#fff;padding:14px;font:11px/1.5 ui-monospace,monospace;border-radius:8px;outline:0;resize:vertical}
+  .modal-box textarea:focus{border-color:var(--accent)}
+  .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+  .modal-actions .btn{padding:10px 18px;font:800 11px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:6px}
+  .modal-actions .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+  .modal-actions .btn.ghost:hover{color:#fff;border-color:var(--accent)}
+  .modal-actions .btn.primary{background:var(--accent);border:1px solid var(--accent);color:#fff}
+  .modal-actions .btn.primary:hover{filter:brightness(1.1)}
+
+  @media print{.filters,.drawer,.drawer-backdrop,.modal{display:none!important}body{background:#fff;color:#111}.lane{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Since Tomorrow · 180 Named Systems · ~475 Mapped Across 10 Layers</div>
+  <h1>We Recompiled <span>the Market.</span></h1>
+  <p class="lede">For decades, the world's most valuable companies have built systems to answer different questions about the same reality. <strong>Since Tomorrow recompiles the questions.</strong></p>
+
+  <div class="estate-strip">
+    <div class="estate-label">Economic Estate — Disaggregated · Not Summed</div>
+    <div class="estate-grid">
+      <div class="estate-item">
+        <span class="estate-k">Disclosed Private Capital & Valuation</span>
+        <span class="estate-v">$715B+</span>
+      </div>
+      <div class="estate-item">
+        <span class="estate-k">Public Equity Value Represented</span>
+        <span class="estate-v">$17T+</span>
+      </div>
+      <div class="estate-item">
+        <span class="estate-k">Reported GMV (Commerce Systems)</span>
+        <span class="estate-v">$10B+</span>
+      </div>
+      <div class="estate-item">
+        <span class="estate-k">Disclosed M&A / Transactions</span>
+        <span class="estate-v">$5.9B+</span>
+      </div>
+    </div>
+    <div class="estate-note">Drawn from the funding string on each lane card. These are different economic objects — private capital, public equity, GMV, and disclosed transactions. They are shown side by side and never added together. Each figure carries its own source on its lane card.</div>
+  </div>
+
+  <div class="manifesto-block">
+    <p>The 180 named systems on this page are not our competitive set.</p>
+    <p><strong>They are the source code we reverse-engineered.</strong></p>
+    <p>Each one has a model of a piece of the market — demand, attention, culture, transactions, supply, computation. Each one encodes it into its own questions, populations, metrics, and answers.</p>
+  </div>
+
+  <ul class="ask-list">
+    <li><strong>Google</strong> asks <span class="verb">what people are looking for.</span></li>
+    <li><strong>TikTok</strong> asks <span class="verb">what holds attention.</span></li>
+    <li><strong>WGSN</strong> asks <span class="verb">what is emerging.</span></li>
+    <li><strong>Profound</strong> asks <span class="verb">what machines are saying.</span></li>
+    <li><strong>Circana</strong> asks <span class="verb">what consumers are buying.</span></li>
+    <li><strong>LTK</strong> asks <span class="verb">what creators convert.</span></li>
+    <li><strong>Amazon</strong> asks <span class="verb">what sells.</span></li>
+    <li><strong>SHEIN</strong> asks <span class="verb">what should be made.</span></li>
+  </ul>
+
+  <div class="manifesto-block">
+    <p>Hundreds more across the ten layers measure another population, another signal, another KPI, another piece of the same market.</p>
+    <p>They each built an answer.</p>
+  </div>
+
+  <h2 class="questions-headline">Since Tomorrow <span>recompiles the questions.</span></h2>
+
+  <p class="fragment-inline">
+    Their questions. Their answers. Their demographics. Their audiences. Their categories. Their KPIs. Their products. Their creators. Their machines. Their markets.
+  </p>
+
+  <p class="fragment-inline">
+    Into one continuously running algorithm operating against the same reality.
+  </p>
+
+  <div class="one-market">One market. <span>One clock.</span> One continuous model of what is happening.</div>
+
+  <p class="negation">Not ten dashboards connected together.</p>
+  <p class="negation">Not another intelligence platform sitting above them.</p>
+
+  <p class="computation"><span>A new computation made from the market itself.</span></p>
+
+  <p class="what-it-sees">
+    It can see a signal begin as <span class="step">human behavior.</span>
+    Resolve the <span class="step">cultural formation</span> producing it.
+    See which <span class="step">populations</span> are moving.
+    See which <span class="step">creators</span> are reproducing it.
+    See what <span class="step">machines</span> have learned about it.
+    See what <span class="step">answers</span> those machines produce.
+    See whether the <span class="step">products</span> in those answers actually exist.
+    See their <span class="step">price, variant, geography and availability.</span>
+    See what <span class="step">demand</span> exists with no corresponding supply.
+    See what <span class="step">should be sourced, made, distributed or amplified.</span>
+    See the <span class="step">action.</span>
+    And then observe what happened <span class="step">next.</span>
+  </p>
+
+  <div class="chain-long">DEMAND → CULTURE → AUDIENCE → CREATOR → MACHINE → ANSWER → PRODUCT → AVAILABILITY → SUPPLY → ACTION → OUTCOME → READBACK</div>
+
+  <!-- ══ POLARITY BLOCK ══ -->
+  <div class="polarity-note">
+    <div class="polarity-head">THE CHAIN RUNS AT TWO SCALES</div>
+    <p>
+      On this page it runs at <strong>N=180</strong> — 180 named systems, each owning a fragment, none owning the loop.
+      The personalized on-demand thesis is the same chain running at <strong>N=1</strong>: one person, one coordinate,
+      all seventeen fields resolved in real time.
+    </p>
+    <p>
+      Seven fields are executable at N=1 <strong>today</strong>: canonical address (Lily AI), product identity (Lily AI),
+      offer construction (Meridian), experience assembly (Meridian), supply response (Seeed, Kinetic),
+      real-time routing (Kinetic), and action (Meridian, Kinetic).
+    </p>
+    <p>
+      Ten are not. <strong>Formation, gap, outcome, and readback have no system in the stack.</strong>
+      The execution loop is assembled. The formation loop is not.
+      That is the difference between personalized on-demand <em>execution</em>
+      and personalized on-demand <em>worlds</em>.
+    </p>
+  </div>
+
+  <p class="fragment-inline">
+    And because every observation resolves against a common identity, geography and clock, the algorithm can ask something none of the individual systems can answer alone:
+  </p>
+
+  <h2 class="what-question">What is the market doing <span>right now</span> — and what should happen next?</h2>
+
+  <p class="reframe"><strong>The 180 named systems below are not competitors.</strong></p>
+  <p class="reframe">They are the constituent intelligence systems that the market previously required you to consult separately.</p>
+  <p class="reframe">Since Tomorrow turns their fragmented questions into <strong>one real-time computation.</strong></p>
+
+  <span class="coord">[ SOURCE × CANONICAL OBJECT × TIME × COORDINATE ]</span>
+
+  <div class="query-wrap">
+    <div class="query-label">Replay This Instrument — one query, one coordinate, one clock</div>
+    <div class="querybar">
+      <input id="query" value="best connecting rooms NYC family new year's" aria-label="Replay receipts for this query"/>
+      <button class="btn-ask" onclick="setQuery()">Replay receipts →</button>
+    </div>
+    <div class="query-mode">MODE: <b>REPLAY</b> · This instrument replays pre-registered cases.</div>
+    <div class="query-coord" id="queryCoord">PRE-REGISTERED CASE · "best connecting rooms NYC family new year's" · every door below answers this same request or reports NOT OBSERVED</div>
+  </div>
+</header>
+
+<div class="filters">
+  <button class="chip active" data-filter="all">All Companies</button>
+  <button class="chip" data-filter="ouroboros">Representation & Measurement</button>
+  <button class="chip" data-filter="utility">Execution Infrastructure</button>
+  <span class="spacer"></span>
+  <span class="count" id="visibleCount">— / —</span>
+  <button class="chip action" onclick="toggleAll()" id="openAllBtn">Open all doors</button>
+</div>
+
+<section class="ruler-wrap">
+  <div class="ruler-head">
+    <div>
+      <div class="step">01 · The ruler</div>
+      <h2>The same 17 fields judge every door.</h2>
+    </div>
+    <p>These are not features. They are the life of the request. A door lights up only where query-level evidence or documented capability supports it. Until a receipt exists, the field stays unknown.</p>
+  </div>
+  <div class="ruler" id="ruler"></div>
+  <div class="ruler-legend">
+    <span class="n1-key">N=1</span> = executable for one person, one coordinate, today — via the existing stack (Lily · Meridian · Seeed · Kinetic). Per documented capability — not yet receipted by this instrument. The other ten fields have no system in the stack. That is the boundary.
+  </div>
+</section>
+
+<main id="main"></main>
+
+<div class="constitution-line">A machine answer is not a fact. A compiled state is not new evidence. Every claim on this page traces back to a source observation — or is marked where it stops.</div>
+
+<div class="closing">
+  <div class="setup">The market never fragmented. The software did.</div>
+  <div class="thesis">The market was already <span>one system.</span><br>Now the software is too.</div>
+  <div class="kicker">Since Tomorrow recompiled the market.</div>
+</div>
+
+<div class="drawer-backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer">
+  <button class="close" id="drawerClose">✕</button>
+  <h3 id="drawerName">—</h3>
+  <span class="domain" id="drawerDomain">—</span>
+
+  <div class="row query-echo"><span class="k">SAME QUERY</span><span class="v" id="drawerQuery">—</span></div>
+
+  <div class="row"><span class="k">MARKET LAYER</span><span class="v" id="drawerLane">—</span></div>
+  <div class="row" id="drawerFundingRow"><span class="k">CAPITAL / VALUATION</span><span class="v" id="drawerFunding">—</span></div>
+  <div class="row"><span class="k">WHERE THEIR MAP ENDS</span><span class="v" id="drawerTheir">—</span></div>
+  <div class="row contrast"><span class="k">SINCE TOMORROW</span><span class="v" id="drawerST">—</span></div>
+  <div class="row"><span class="k">EVIDENCE STATE</span><span class="v">DOCUMENTED-ONLY</span></div>
+
+  <div class="row answer"><span class="k">WHAT THIS SYSTEM ACTUALLY RETURNED</span><span class="v empty" id="drawerAnswer">—</span></div>
+  <div class="row"><span class="k">OBSERVATION STATE</span><span class="v" id="drawerState">—</span></div>
+  <div class="row"><span class="k">17-FIELD COVERAGE FOR THIS QUERY</span><div class="drawer-fields" id="drawerFields"></div></div>
+  <div class="row"><span class="k">WHERE THE EVIDENCE STOPS</span><span class="v" id="drawerStop">—</span></div>
+  <div class="row"><span class="k">OBSERVED AT</span><span class="v" id="drawerObserved">—</span></div>
+  <div class="row"><span class="k">EVIDENCE / RECEIPT</span><span class="v" id="drawerEvidence">—</span></div>
+  <div class="row"><span class="k">RAW ANSWER / RESPONSE EXCERPT</span><span class="v" id="drawerRaw">—</span></div>
+  <div class="row"><span class="k">CLAIM CEILING</span><span class="v" id="drawerCeiling">—</span></div>
+
+  <div class="row"><span class="k">COMPANY</span><span class="v" id="drawerLink">—</span></div>
+</aside>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="k">Operator Control · Not Public</div>
+    <h2>Load receipt pack (internal use only)</h2>
+    <textarea id="jsonInput" spellcheck="false"></textarea>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeImport()">Cancel</button>
+      <button class="btn primary" onclick="applyJson()">Apply receipts</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════
+// 17 FIELDS — the ruler
+// ═══════════════════════════════════════════════════════════════════════
+const FIELDS = [
+  ["01","Demand"],["02","Formation"],["03","Address"],["04","Audience"],
+  ["05","Creator"],["06","Format"],["07","Machine"],["08","Answer"],
+  ["09","Product"],["10","Offer"],["11","Experience"],["12","Supply"],
+  ["13","Clock"],["14","Gap"],["15","Action"],["16","Outcome"],["17","Readback"]
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// N=1 EXECUTABLE FIELDS — documented-capability tier, not receipted.
+// Marked in the ruler with an accent-2 "N=1" tag.
+// ═══════════════════════════════════════════════════════════════════════
+const N1_FIELDS = ["03","09","10","11","12","13","15"];
+
+// ═══════════════════════════════════════════════════════════════════════
+// PRE-REGISTERED CASES
+// ═══════════════════════════════════════════════════════════════════════
+const PRE_REGISTERED_QUERIES = [
+  "best connecting rooms NYC family new year's"
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// FROZEN LANE DATA
+// ═══════════════════════════════════════════════════════════════════════
+const LANES_DATA = [
+  {
+    num:"01", name:"AI Visibility & GEO", stat:"~200+ companies • $2.4B+ M&A", type:"ouroboros",
+    layout:"boundary",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"AI Visibility & GEO",
+    measure:"How brands, products, and sources appear inside AI answers.",
+    boundary_their_intro:"They measure the answer.",
+    boundary_their_questions:["Did the brand appear?","Was it cited?","How often?","In what position?","Against which competitors?","Across which models?"],
+    boundary_their_note:"That has become a real and valuable category. But the answer is still only a representation of the market.",
+    boundary_divider:["THE MACHINE ANSWER ENDS HERE.","REALITY CONTINUES."],
+    boundary_reality_questions:["Did the product the machine recommended actually exist?","Was the exact variant available?","At what price?","In which market?","On which shelf?","Did the machine omit products that were already present in the real market?","Did culture move before the answer moved?","Did creators move before search moved?","Is demand forming around something no retailer sells yet?","Did the recommendation create an action?","And after the action — what changed?"],
+    boundary_since_intro:"Since Tomorrow",
+    boundary_since_head:"We measure the distance between machine representation and observable reality.",
+    boundary_since_chain:["Not merely: “What did the AI say?”","But: “What was true when it said it?”","And then: “What became true next?”"],
+    boundary_since_footer:"CULTURE → DEMAND → CREATOR → MACHINE → ANSWER → PRODUCT → AVAILABILITY → ACTION → OUTCOME → READBACK",
+    boundary_difference_head:"The difference",
+    boundary_difference_body:"AI Visibility measures presence inside the answer. <strong>Since Tomorrow measures whether the answer survives contact with the market.</strong>",
+    funding:"$335M (Profound), $68M (Bluefish), $29M (Peec), $2.1B+ in SEO/DX exits",
+    companies:[
+      {name:"Profound",domain:"profound.com",initials:"PF",color:"#6366F1"},
+      {name:"Peec",domain:"peec.ai",initials:"PE",color:"#3B82F6"},
+      {name:"Bluefish",domain:"bluefish.ai",initials:"BF",color:"#00F2FE"},
+      {name:"Evertune",domain:"evertune.ai",initials:"EV",color:"#10B981"},
+      {name:"BrandLight",domain:"brandlight.ai",initials:"BL",color:"#F59E0B"},
+      {name:"AthenaHQ",domain:"athenahq.com",initials:"AT",color:"#EC4899"},
+      {name:"Daydream",domain:"daydream.so",initials:"DD",color:"#8B5CF6"},
+      {name:"Accio",domain:"accio.com",initials:"AC",color:"#FF6A00"},
+      {name:"Botify",domain:"botify.com",initials:"BO",color:"#3B82F6"},
+      {name:"Semrush",domain:"semrush.com",icon:"semrush",color:"#FF6600"},
+      {name:"Ahrefs",domain:"ahrefs.com",icon:"ahrefs",color:"#204ECF"},
+      {name:"Moz",domain:"moz.com",initials:"MZ",color:"#0F172A"},
+      {name:"Conductor",domain:"conductor.com",initials:"CD",color:"#00A3E0"},
+      {name:"BrightEdge",domain:"brightedge.com",initials:"BE",color:"#0077A6"},
+      {name:"Scrunch",domain:"scrunch.com",initials:"SC",color:"#8B5CF6"},
+      {name:"Sitecore",domain:"sitecore.com",initials:"SI",color:"#E4002B"},
+      {name:"Yext",domain:"yext.com",initials:"YX",color:"#FFCC00"},
+      {name:"Contentful",domain:"contentful.com",initials:"CF",color:"#2478CC"},
+      {name:"Optimizely",domain:"optimizely.com",initials:"OP",color:"#0055FF"},
+      {name:"Algolia",domain:"algolia.com",initials:"AG",color:"#003DFF"},
+      {name:"Surfer",domain:"surferseo.com",initials:"SF",color:"#1EB47D"},
+      {name:"Frase",domain:"frase.io",initials:"FR",color:"#6366F1"},
+      {name:"Writesonic",domain:"writesonic.com",initials:"WS",color:"#111827"},
+      {name:"Birdeye",domain:"birdeye.com",initials:"BD",color:"#EF4444"},
+      {name:"Otterly",domain:"otterly.ai",initials:"OT",color:"#000000"},
+      {name:"LLMrefs",domain:"llmrefs.com",initials:"LR",color:"#111827"},
+      {name:"Goodie",domain:"goodie.ai",initials:"GD",color:"#6366F1"},
+      {name:"HubSpot",domain:"hubspot.com",icon:"hubspot",color:"#FF7A59"},
+      {name:"Adobe",domain:"adobe.com",icon:"adobe",color:"#FF0000"},
+      {name:"Similarweb",domain:"similarweb.com",icon:"similarweb",color:"#1638FF"},
+      {name:"Cloudflare",domain:"cloudflare.com",icon:"cloudflare",color:"#F38020"},
+      {name:"Fastly",domain:"fastly.com",initials:"FY",color:"#FF282D"},
+      {name:"Akamai",domain:"akamai.com",initials:"AK",color:"#009BDE"},
+      {name:"Datadog",domain:"datadoghq.com",initials:"DD",color:"#632CA6"},
+      {name:"Triple Whale",domain:"triplewhale.com",initials:"TW",color:"#2AE59E"},
+      {name:"Stackline",domain:"stackline.com",initials:"SL",color:"#111827"},
+      {name:"AirOps",domain:"airops.com",initials:"AO",color:"#34D399"}
+    ]
+  },
+  {
+    num:"02", name:"Agent Web Infrastructure", stat:"~25 companies • $5B+ Capital", type:"utility",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Agent Web Infrastructure",
+    measure:"Search, browsing, extraction, crawling, and execution infrastructure for agents.",
+    st_head:"We decide what observation is actually necessary.",
+    st_detail:["The system routes the smallest sufficient path, acquires the evidence, preserves the receipt, and stops when the claim is supported.","The road is infrastructure."],
+    st_closer:"KNOWING WHICH ROAD TO TAKE—AND WHEN YOU HAVE ENOUGH EVIDENCE—IS THE OPERATING SYSTEM.",
+    funding:"$2.2B (Exa), $2.0B (Parallel), $300M (Browserbase), $275M exit (Tavily)",
+    companies:[
+      {name:"Exa",domain:"exa.ai",initials:"EX",color:"#4F46E5"},
+      {name:"Parallel",domain:"parallel.ai",initials:"PR",color:"#06B6D4"},
+      {name:"Firecrawl",domain:"firecrawl.dev",initials:"FC",color:"#FF4500"},
+      {name:"Tavily",domain:"tavily.com",initials:"TV",color:"#2563EB"},
+      {name:"Browserbase",domain:"browserbase.com",initials:"BB",color:"#111827"},
+      {name:"Browser Use",domain:"browser-use.com",initials:"BU",color:"#000000"},
+      {name:"Serper",domain:"serper.dev",initials:"SR",color:"#059669"},
+      {name:"SerpAPI",domain:"serpapi.com",initials:"SA",color:"#4B5563"},
+      {name:"Brave API",domain:"brave.com",icon:"brave",color:"#FB542B"},
+      {name:"Bright Data",domain:"brightdata.com",initials:"BD",color:"#0F172A"},
+      {name:"Oxylabs",domain:"oxylabs.io",initials:"OL",color:"#3B82F6"},
+      {name:"Apify",domain:"apify.com",icon:"apify",color:"#ED145B"},
+      {name:"Zyte",domain:"zyte.com",initials:"ZY",color:"#232F3E"},
+      {name:"ZenRows",domain:"zenrows.com",initials:"ZR",color:"#000000"},
+      {name:"ScrapingBee",domain:"scrapingbee.com",initials:"SB",color:"#FFD54F"},
+      {name:"Crawlbase",domain:"crawlbase.com",initials:"CB",color:"#111827"},
+      {name:"Scrape.do",domain:"scrape.do",initials:"SD",color:"#6366F1"},
+      {name:"Nimble",domain:"nimbleway.com",initials:"NB",color:"#6366F1"}
+    ]
+  },
+  {
+    num:"03", name:"Trend Forecasting & Panels", stat:"~35 global legacy systems • £1B+ Capital", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Trend Forecasting & Panels",
+    measure:"Search, surveys, transactions, panels, historical behavior, and declared consumer intent.",
+    st_head:"We observe demand while it is still becoming a market.",
+    st_detail:["Language.","Creators.","Objects.","Behaviors.","Places.","Markets.","Machine attention.","Then we resolve those observations into the cultural formation producing them."],
+    st_closer:"NOT A TREND REPORT. A LIVE MARKET FORMING.",
+    funding:"£700M (WGSN Apax buyout), tens of millions in early-stage seed trackers",
+    companies:[
+      {name:"WGSN",domain:"wgsn.com",initials:"WG",color:"#000000"},
+      {name:"Trendalytics",domain:"trendalytics.co",initials:"TA",color:"#EC4899"},
+      {name:"Spate",domain:"spate.nyc",initials:"SP",color:"#000000"},
+      {name:"Glimpse",domain:"meetglimpse.com",initials:"GL",color:"#3B82F6"},
+      {name:"Exploding Topics",domain:"explodingtopics.com",initials:"ET",color:"#10B981"},
+      {name:"Nielsen",domain:"nielsen.com",initials:"NL",color:"#4120A4"},
+      {name:"Circana",domain:"circana.com",initials:"CC",color:"#002C77"},
+      {name:"Kantar",domain:"kantar.com",initials:"KT",color:"#000000"},
+      {name:"Mintel",domain:"mintel.com",initials:"MT",color:"#DE1A1A"},
+      {name:"Euromonitor",domain:"euromonitor.com",initials:"EU",color:"#005BA1"},
+      {name:"Gartner",domain:"gartner.com",initials:"GA",color:"#002856"},
+      {name:"Forrester",domain:"forrester.com",initials:"FO",color:"#EA1C24"}
+    ]
+  },
+  {
+    num:"04", name:"Creator Commerce & Affiliates", stat:"~55 matrix platforms • $3B+ Valuations", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Creator Commerce & Affiliates",
+    measure:"Creators, campaigns, links, known products, clicks, conversions, and affiliate transactions.",
+    st_head:"We treat the scene itself as commerce.",
+    st_detail:["Every meaningful object can become an address:","the known product,","the modified product,","the accessory nobody tagged,","the object with no listing,","the thing people want that nobody sells yet.","Then we connect that object to inventory, sourcing, manufacturing, distribution, and creator participation."],
+    st_closer:"THE LINK IS NOT THE STOREFRONT. THE WORLD IN THE FRAME IS.",
+    funding:"$6B GMV (LTK), $4B GMV (Euka), $2.7B+ M&A through 2026",
+    companies:[
+      {name:"LTK",domain:"shopltk.com",initials:"LTK",color:"#000000"},
+      {name:"Euka",domain:"euka.com",initials:"EK",color:"#6366F1"},
+      {name:"Levanta",domain:"levanta.io",initials:"LV",color:"#06B6D4"},
+      {name:"CreatorIQ",domain:"creatoriq.com",initials:"CIQ",color:"#1E3A8A"},
+      {name:"GRIN",domain:"grin.co",initials:"GR",color:"#10B981"},
+      {name:"Upfluence",domain:"upfluence.com",initials:"UP",color:"#FF5A5F"},
+      {name:"Aspire",domain:"aspire.io",initials:"AS",color:"#4F46E5"},
+      {name:"Impact",domain:"impact.com",initials:"IM",color:"#111827"},
+      {name:"PartnerStack",domain:"partnerstack.com",initials:"PS",color:"#0052CC"},
+      {name:"Superfiliate",domain:"superfiliate.com",initials:"SF",color:"#34D399"},
+      {name:"Flagship",domain:"flagship.shop",initials:"FS",color:"#000000"},
+      {name:"Markable",domain:"markable.com",initials:"MK",color:"#111827"},
+      {name:"Mavrck",domain:"mavrck.co",initials:"MV",color:"#000000"},
+      {name:"Amaze",domain:"amaze.co",initials:"AM",color:"#FF6B6B"},
+      {name:"Whalar",domain:"whalar.com",initials:"WH",color:"#000000"},
+      {name:"Awin",domain:"awin.com",initials:"AW",color:"#F5B21A"},
+      {name:"CJ Affiliate",domain:"cj.com",initials:"CJ",color:"#111827"},
+      {name:"Rakuten",domain:"rakuten.com",initials:"RK",color:"#BF0000"},
+      {name:"ShareASale",domain:"shareasale.com",initials:"SS",color:"#111827"},
+      {name:"Ekhoo",domain:"ekhoo.io",initials:"EK",color:"#6366F1"},
+      {name:"HypeAuditor",domain:"hypeauditor.com",initials:"HA",color:"#6366F1"},
+      {name:"Modash",domain:"modash.io",initials:"MD",color:"#000000"},
+      {name:"Captiv8",domain:"captiv8.io",initials:"C8",color:"#6366F1"},
+      {name:"Fohr",domain:"fohr.co",initials:"FH",color:"#000000"},
+      {name:"Klear",domain:"klear.com",initials:"KL",color:"#6366F1"},
+      {name:"Get Social",domain:"get-social.io",initials:"GS",color:"#000000"}
+    ]
+  },
+  {
+    num:"05", name:"Generative Synthesis", stat:"~20 hyperscalers • $3T+ Combined Cap", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Generative Synthesis",
+    measure:"Models that generate video, images, voice, copy, characters, and entire scenes.",
+    st_head:"They can generate anything. We determine what should exist.",
+    st_detail:["Which story.","Which scene.","Which object.","Which creator.","Which audience.","Which market.","Which moment.","Generation is becoming abundant.","Selection is becoming scarce.","The valuable asset is not the pixel."],
+    st_closer:"IT IS THE DECISION BEFORE THE PIXEL.",
+    funding:"$500B (OpenAI), $183B (Anthropic), $1.1B (ElevenLabs), $306M (Runway)",
+    companies:[
+      {name:"Google Vids",domain:"google.com",icon:"google",color:"#4285F4"},
+      {name:"Veo",domain:"deepmind.google",initials:"VE",color:"#4285F4"},
+      {name:"OpenAI Sora",domain:"openai.com",icon:"openai",color:"#000000"},
+      {name:"Meta Muse",domain:"meta.com",icon:"meta",color:"#044AF4"},
+      {name:"Anthropic",domain:"anthropic.com",initials:"AN",color:"#E0B883"},
+      {name:"Runway",domain:"runwayml.com",initials:"RW",color:"#000000"},
+      {name:"Pika",domain:"pika.art",initials:"PK",color:"#000000"},
+      {name:"Luma AI",domain:"lumalabs.ai",initials:"LM",color:"#111827"},
+      {name:"Kling",domain:"klingai.com",initials:"KL",color:"#000000"},
+      {name:"Hailuo",domain:"hailuoai.com",initials:"HL",color:"#000000"},
+      {name:"Seedance",domain:"bytedance.com",initials:"SD",color:"#6033B1"},
+      {name:"CapCut",domain:"capcut.com",initials:"CC",color:"#000000"},
+      {name:"ElevenLabs",domain:"elevenlabs.io",initials:"EL",color:"#000000"},
+      {name:"Midjourney",domain:"midjourney.com",initials:"MJ",color:"#4F46E5"},
+      {name:"Black Forest Labs",domain:"blackforestlabs.ai",initials:"BFL",color:"#000000"},
+      {name:"HeyGen",domain:"heygen.com",initials:"HG",color:"#6366F1"},
+      {name:"Synthesia",domain:"synthesia.io",initials:"SY",color:"#0052CC"}
+    ]
+  },
+  {
+    num:"06", name:"Agent Orchestration", stat:"~35 orchestration architectures • $50B+", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Agent Orchestration",
+    measure:"Frameworks for coordinating models, agents, tools, memory, workflows, and execution.",
+    st_head:"Execution is not the same as knowing the work was worth doing.",
+    st_detail:["We govern:","what question is being answered,","what evidence supports it,","what remains unknown,","what the system is allowed to claim,","and whether the result is strong enough to enter production."],
+    st_closer:"THE AGENT CAN FINISH THE TASK. SINCE TOMORROW DECIDES WHETHER THE RESULT IS TRUE ENOUGH TO USE.",
+    funding:"$9B (Cursor), $2B (Cognition), $175M (Sierra), $300M (Harvey)",
+    companies:[
+      {name:"DeepSeek",domain:"deepseek.com",icon:"deepseek",color:"#4D6BFE"},
+      {name:"ByteDance DeerFlow",domain:"bytedance.com",initials:"BD",color:"#6033B1"},
+      {name:"LangChain",domain:"langchain.com",icon:"langchain",color:"#1C3C3C"},
+      {name:"LlamaIndex",domain:"llamaindex.ai",initials:"LI",color:"#000000"},
+      {name:"CrewAI",domain:"crewai.com",initials:"CR",color:"#000000"},
+      {name:"Microsoft AutoGen",domain:"microsoft.com",icon:"microsoft",color:"#00A4EF"},
+      {name:"OpenAI Agents SDK",domain:"openai.com",initials:"OA",color:"#000000"},
+      {name:"Sierra",domain:"sierra.ai",initials:"SR",color:"#0F172A"},
+      {name:"Harvey",domain:"harvey.ai",initials:"HV",color:"#000000"},
+      {name:"Cursor",domain:"cursor.com",initials:"CU",color:"#000000"},
+      {name:"Cognition AI",domain:"cognition.ai",initials:"CG",color:"#4F46E5"},
+      {name:"Replit",domain:"replit.com",icon:"replit",color:"#F26207"},
+      {name:"GitHub Copilot",domain:"github.com",icon:"github",color:"#FFFFFF"},
+      {name:"Dust",domain:"dust.tt",initials:"DU",color:"#000000"},
+      {name:"Relevance AI",domain:"relevanceai.com",initials:"RA",color:"#6366F1"},
+      {name:"Salesforce Agentforce",domain:"salesforce.com",initials:"SF",color:"#00A1E0"},
+      {name:"ServiceNow",domain:"servicenow.com",initials:"SN",color:"#62D84E"},
+      {name:"UiPath",domain:"uipath.com",icon:"uipath",color:"#FA4616"},
+      {name:"Automation Anywhere",domain:"automationanywhere.com",initials:"AA",color:"#FF6600"}
+    ]
+  },
+  {
+    num:"07", name:"Market Intelligence & Retail Catalogs", stat:"~30 players • $10B+ Capital Matrix", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Market Intelligence & Retail Catalogs",
+    measure:"Known products, merchant feeds, prices, transactions, market share, and catalog activity.",
+    st_head:"We also measure what the catalog cannot see.",
+    st_detail:["Demand without supply.","Objects visible in culture but absent from retail.","Products people are assembling themselves.","Variants the market has not formalized.","Commercial demand with no existing SKU.","This is the market's negative space."],
+    st_closer:"WHAT EXISTS MATTERS. WHAT SHOULD EXIST BUT DOESN'T MAY MATTER MORE.",
+    funding:"$1.5B (Numerator), $472M (YipitData), public giants (Circana, Stackline)",
+    companies:[
+      {name:"Jungle Scout",domain:"junglescout.com",initials:"JS",color:"#FF9900"},
+      {name:"Helium 10",domain:"helium10.com",initials:"H10",color:"#0A467C"},
+      {name:"DataWeave",domain:"dataweave.com",initials:"DW",color:"#0073EC"},
+      {name:"PriceSpider",domain:"pricespider.com",initials:"PS",color:"#000000"},
+      {name:"Profitero",domain:"profitero.com",initials:"PF",color:"#002F6C"},
+      {name:"YipitData",domain:"yipitdata.com",initials:"YD",color:"#111827"},
+      {name:"Numerator",domain:"numerator.com",initials:"NM",color:"#00B2A9"},
+      {name:"Second Measure",domain:"secondmeasure.com",initials:"SM",color:"#000000"},
+      {name:"Cardlytics",domain:"cardlytics.com",initials:"CD",color:"#005CA9"},
+      {name:"Consumer Edge",domain:"consumer-edge.com",initials:"CE",color:"#111827"},
+      {name:"SPINS",domain:"spins.com",initials:"SP",color:"#00A3E0"}
+    ]
+  },
+  {
+    num:"08", name:"Supply Chain & C2M Manufacturing", stat:"~30 global hubs • $15B+ Infrastructure", type:"utility",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Supply Chain & C2M Manufacturing",
+    measure:"Factories, suppliers, freight, inventory, planning, procurement, and movement of known goods.",
+    st_head:"We connect emerging demand to the supply decision upstream.",
+    st_detail:["Not simply:","Where is the product?","But:","What should be sourced?","What should be made?","What should be localized?","What should be replenished?","And where?"],
+    st_closer:"DEMAND → OBJECT → SUPPLY → MARKET",
+    funding:"$3.5B (o9 Solutions), $2.3B (Flexport), $1.2B (Project44), $1B (Altana)",
+    companies:[
+      {name:"Project44",domain:"project44.com",initials:"P44",color:"#0052CC"},
+      {name:"Flexport",domain:"flexport.com",initials:"FP",color:"#002F6C"},
+      {name:"FourKites",domain:"fourkites.com",initials:"FK",color:"#007A87"},
+      {name:"Altana AI",domain:"altana.ai",initials:"AL",color:"#0F172A"},
+      {name:"Interos",domain:"interos.ai",initials:"IN",color:"#000000"},
+      {name:"Prewave",domain:"prewave.com",initials:"PW",color:"#6366F1"},
+      {name:"Everstream",domain:"everstream.ai",initials:"EV",color:"#000000"},
+      {name:"Resilinc",domain:"resilinc.com",initials:"RS",color:"#0052CC"},
+      {name:"o9 Solutions",domain:"o9solutions.com",initials:"O9",color:"#10B981"},
+      {name:"Kinaxis",domain:"kinaxis.com",initials:"KX",color:"#C8102E"},
+      {name:"Coupa",domain:"coupa.com",initials:"CO",color:"#F26522"},
+      {name:"Blue Yonder",domain:"blueyonder.com",initials:"BY",color:"#004B87"},
+      {name:"ImportYeti",domain:"importyeti.com",initials:"IY",color:"#000000"},
+      {name:"Panjiva",domain:"panjiva.com",initials:"PJ",color:"#0052A4"},
+      {name:"SHEIN",domain:"sheingroup.com",initials:"SH",color:"#000000"},
+      {name:"Temu",domain:"temu.com",initials:"TE",color:"#FF6600"}
+    ]
+  },
+  {
+    num:"09", name:"Social Listening", stat:"~25 enterprise suites • $5B+ Capital", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"Social Listening",
+    measure:"Words: captions, hashtags, transcripts, mentions, sentiment, and conversations.",
+    st_head:"Culture contains information people never put into words.",
+    st_detail:["The object in the hand.","The unexpected pairing.","The custom modification.","The styling pattern.","The room.","The location.","The sequence of objects across a scene.","We observe the physical and visual behavior underneath the text."],
+    st_closer:"NOT JUST WHAT PEOPLE SAY. WHAT THEY ARE ACTUALLY DOING.",
+    funding:"$2.4B (Meltwater), $1.8B IPO (Sprinklr), $450M (Brandwatch)",
+    companies:[
+      {name:"Brandwatch",domain:"brandwatch.com",initials:"BW",color:"#1A2B4C"},
+      {name:"Sprinklr",domain:"sprinklr.com",initials:"SPK",color:"#000000"},
+      {name:"Meltwater",domain:"meltwater.com",initials:"MW",color:"#02354F"},
+      {name:"Talkwalker",domain:"talkwalker.com",initials:"TW",color:"#31394D"},
+      {name:"Pulsar",domain:"pulsarplatform.com",initials:"PL",color:"#0A0A0C"},
+      {name:"Onclusive",domain:"onclusive.com",initials:"ON",color:"#000000"},
+      {name:"Audiense",domain:"audiense.com",initials:"AU",color:"#000000"},
+      {name:"NetBase Quid",domain:"netbasequid.com",initials:"NQ",color:"#000000"},
+      {name:"CultureBank",domain:"culturebank.ai",initials:"CB",color:"#6366F1"},
+      {name:"TikTok Creative Center",domain:"tiktok.com",initials:"TC",color:"#000000"},
+      {name:"Google Trends",domain:"trends.google.com",initials:"GT",color:"#4285F4"}
+    ]
+  },
+  {
+    num:"10", name:"The Convergence Giants", stat:"~20 platform networks • $17T+ Combined", type:"ouroboros",
+    depth_allocation:null, receipt_count:0, boundary_archetype:"The Convergence Giants",
+    measure:"Massive portions of search, media, commerce, advertising, computing, devices, models, and distribution.",
+    st_head:"A market view that does not collapse into any one platform's version of reality.",
+    st_detail:["The same object can move through culture, a creator video, an AI answer, a retailer, a store, a factory, and a purchase.","Since Tomorrow preserves its identity across that journey:"],
+    st_closer:"SAME MARKET. SAME OBJECTS. SAME CLOCK. DIFFERENT EVIDENCE.",
+    funding:"$17T+ combined market cap (Google, Meta, Amazon, Apple, Microsoft, NVIDIA)",
+    companies:[
+      {name:"Netflix",domain:"netflix.com",icon:"netflix",color:"#E50914"},
+      {name:"Amazon",domain:"amazon.com",icon:"amazon",color:"#FF9900"},
+      {name:"Apple",domain:"apple.com",icon:"apple",color:"#FFFFFF"},
+      {name:"NVIDIA",domain:"nvidia.com",icon:"nvidia",color:"#76B900"},
+      {name:"Tesla",domain:"tesla.com",icon:"tesla",color:"#CC0000"},
+      {name:"Microsoft",domain:"microsoft.com",icon:"microsoft",color:"#00A4EF"},
+      {name:"Alibaba",domain:"alibaba.com",initials:"AB",color:"#FF6A00"},
+      {name:"Tencent",domain:"tencent.com",initials:"TC",color:"#12B7F5"},
+      {name:"Samsung",domain:"samsung.com",initials:"SS",color:"#1428A0"},
+      {name:"Walmart",domain:"walmart.com",initials:"WM",color:"#0071CE"},
+      {name:"Shopify",domain:"shopify.com",icon:"shopify",color:"#7AB55C"},
+      {name:"Adobe",domain:"adobe.com",icon:"adobe",color:"#FF0000"},
+      {name:"ByteDance",domain:"bytedance.com",initials:"BD",color:"#6033B1"}
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════════════
+// RUNTIME STATE
+// ═══════════════════════════════════════════════════════════════════════
+let RUN = {
+  query: PRE_REGISTERED_QUERIES[0],
+  reality_fields: {},
+  lanes: {},
+  companies: {},
+  proof: { result_state: "AWAITING FULL QUERY TRACE" }
+};
+
+const POC_LANES = ["01","04","07"];
+
+// ═══════════════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════════════
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function clsOf(v){return v==='live'?'live':(v==='documented'||v==='doc')?'doc':(v==='supported_stop'||v==='stop')?'stop':'unknown'}
+function lblOf(v){return v==='live'?'LIVE':(v==='documented'||v==='doc')?'DOC':(v==='supported_stop'||v==='stop')?'STOP':'?'}
+function companyKey(laneId,name){return `${laneId}::${name}`}
+function stateFor(company,laneId){
+  return RUN.companies[companyKey(laneId,company.name)]
+      || RUN.companies[company.name]
+      || {};
+}
+function fieldState(obj,id){
+  if(!obj||!obj.fields) return 'unknown';
+  const v = obj.fields[id];
+  return (v && v.display_state) ? v.display_state : (v || 'unknown');
+}
+function laneReceiptStatus(lane){
+  const count = (lane.receipt_count || 0);
+  const state = "DOCUMENTED-ONLY";
+  const base  = `${count} RECEIPTS · ${state}`;
+  return POC_LANES.includes(lane.num) ? `${base} · POC LANE` : base;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// LOGO CHAIN — frozen
+// ═══════════════════════════════════════════════════════════════════════
+function buildLogoSources(company){
+  const out = [];
+  if (company.icon){
+    const slug = company.icon.toLowerCase().replace(/ /g,'');
+    const hex  = (company.color || '888888').replace('#','');
+    out.push(`https://cdn.simpleicons.org/${slug}/${hex}`);
+  }
+  if (company.domain){
+    out.push(`https://www.google.com/s2/favicons?domain=${company.domain}&sz=128`);
+    out.push(`https://icons.duckduckgo.com/ip3/${company.domain}.ico`);
+    out.push(`https://unavatar.io/${company.domain}`);
+  }
+  return out;
+}
+function renderLogoNode(company){
+  const initials = company.initials || company.name.substring(0,3).toUpperCase();
+  const sources  = buildLogoSources(company);
+  const srcJSON  = JSON.stringify(sources).replace(/"/g,'&quot;');
+  const firstSrc = sources[0] || '';
+  return `
+    <div class="mono">${initials}</div>
+    <img class="logo-img" src="${firstSrc}" alt="${esc(company.name)}"
+      data-sources='${srcJSON}' data-idx="0" referrerpolicy="no-referrer"/>
+  `;
+}
+function wireLogos(){
+  document.querySelectorAll('.logo-box img.logo-img').forEach((img) => {
+    if (img.dataset.wired === '1') return;
+    img.dataset.wired = '1';
+    const badge = img.parentElement.querySelector('.mono');
+    let sources = [];
+    try { sources = JSON.parse(img.dataset.sources || '[]'); } catch(e){}
+    let idx = parseInt(img.dataset.idx || '0', 10);
+    const hideBadge = () => { if (badge) badge.style.opacity = '0'; };
+    const hideImg   = () => { img.style.display = 'none'; };
+    function advance(){
+      idx++;
+      if (idx < sources.length){ img.dataset.idx = String(idx); img.src = sources[idx]; }
+      else { hideImg(); }
+    }
+    const onLoad = () => { if (img.naturalWidth > 1 && img.naturalHeight > 1) hideBadge(); else advance(); };
+    const onError = () => advance();
+    img.addEventListener('load', onLoad);
+    img.addEventListener('error', onError);
+    if (img.complete){ if (img.naturalWidth > 1) hideBadge(); else advance(); }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// RULER — N=1 fields get the accent-2 tag; live/doc/stop states are green/gold/red
+// ═══════════════════════════════════════════════════════════════════════
+function renderRuler(){
+  const root = document.getElementById('ruler');
+  root.innerHTML = FIELDS.map(([id,name])=>{
+    const v = RUN.reality_fields?.[id]?.state || 'unknown';
+    const isN1 = N1_FIELDS.includes(id);
+    const classes = `rcell ${clsOf(v)}${isN1 ? ' n1' : ''}`;
+    return `<div class="${classes}">
+      <span class="n">${id}</span>
+      <b>${name}</b>
+      <span class="s">${esc(v)}</span>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// RIGHT COLUMN (FROZEN)
+// ═══════════════════════════════════════════════════════════════════════
+function renderStandardRight(lane){
+  return `
+    <h4 class="st-q">${lane.st_head}</h4>
+    <div class="st-detail">${lane.st_detail.map(f => `<span class="frag">${f}</span>`).join("")}</div>
+    <div class="st-closer">${lane.st_closer}</div>
+  `;
+}
+function renderBoundaryRight(lane){
+  const theirQs   = lane.boundary_their_questions.map(q => `<span class="q">${q}</span>`).join("");
+  const realityQs = lane.boundary_reality_questions.map(q => `<span class="q">${q}</span>`).join("");
+  const chainQs   = lane.boundary_since_chain.map(f => `<span class="frag">${f}</span>`).join("");
+  return `
+    <div class="boundary-block">
+      <div class="st-q">${lane.boundary_their_intro}</div>
+      <div class="boundary-question">${theirQs}</div>
+      <div class="boundary-note">${lane.boundary_their_note}</div>
+    </div>
+    <div class="boundary-divider">${lane.boundary_divider[0]}<br>${lane.boundary_divider[1]}</div>
+    <div class="boundary-block">
+      <div class="boundary-question">${realityQs}</div>
+    </div>
+    <div class="boundary-block">
+      <div class="boundary-since">${lane.boundary_since_intro}</div>
+      <div class="boundary-question">${lane.boundary_since_head}</div>
+      <div class="st-detail" style="margin-top:8px;">${chainQs}</div>
+      <div class="st-detail" style="margin-top:10px;font-family:ui-monospace,monospace;font-size:10.5px;color:var(--st-tag);letter-spacing:.04em;">${lane.boundary_since_footer}</div>
+    </div>
+    <div class="boundary-difference">
+      <div style="font-weight:800;color:#fff;margin-bottom:4px;">${lane.boundary_difference_head}</div>
+      <div>${lane.boundary_difference_body}</div>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// LAYOUT COMPILER
+// ═══════════════════════════════════════════════════════════════════════
+const mainContainer     = document.getElementById("main");
+const visibleCountLabel = document.getElementById("visibleCount");
+let activeFilter = "all";
+
+function renderLaneStrip(lane){
+  const lr = RUN.lanes[lane.num] || {};
+  const segs = FIELDS.map(([id])=>{
+    const v = (lr.fields && (lr.fields[id]?.display_state || lr.fields[id])) || 'unknown';
+    return `<div class="seg ${clsOf(v)}" title="${id} · ${esc(v)}">${lblOf(v)}</div>`;
+  }).join('');
+  return `<div class="lane-strip">${segs}</div>`;
+}
+
+function compileLandscapeLayout(){
+  mainContainer.innerHTML = "";
+  let totalNodes   = 0;
+  let visibleNodes = 0;
+
+  LANES_DATA.forEach((lane) => {
+    totalNodes += lane.companies.length;
+    if (activeFilter !== "all" && lane.type !== activeFilter) return;
+    visibleNodes += lane.companies.length;
+
+    const isPOC = POC_LANES.includes(lane.num);
+
+    const laneNode = document.createElement("section");
+    laneNode.className = "lane" + (isPOC ? " poc" : "");
+    laneNode.setAttribute("data-type", lane.type);
+
+    const stripHTML = renderLaneStrip(lane);
+
+    const body = document.createElement("div");
+    body.className = "lane-body";
+
+    const idCol = document.createElement("div");
+    idCol.className = "lane-id";
+    idCol.innerHTML = `
+      <span class="lane-num">LAYER ${lane.num}</span>
+      <h2 class="lane-name">${esc(lane.name)}</h2>
+      <span class="lane-stat">${esc(lane.stat)}</span>      <span class="lane-receipt-status${isPOC ? ' poc' : ''}">${laneReceiptStatus(lane)}</span>
+      <span class="lane-section-label">WHERE THEIR MAP ENDS</span>
+      <p class="lane-measure">${esc(lane.measure)}</p>
+    `;
+
+    const gridCol = document.createElement("div");
+    gridCol.className = "lane-grid";
+
+    lane.companies.forEach((company) => {
+      const s = stateFor(company, lane.num);
+      const st = s.display_state || s.live_probe_status || 'unknown';
+      const cCls = clsOf(st);
+
+      const card = document.createElement("div");
+      card.className = "card " + cCls;
+
+      const logoBox = document.createElement("div");
+      logoBox.className = "logo-box";
+      logoBox.innerHTML = renderLogoNode(company);
+
+      const nameLabel = document.createElement("span");
+      nameLabel.className = "card-name";
+      nameLabel.textContent = company.name;
+
+      const badge = document.createElement("span");
+      badge.className = "card-state-badge";
+      badge.textContent = (st === 'unknown') ? 'NOT OBSERVED' : st.toUpperCase();
+
+      const answerText = (s.query_answer && s.query_answer.response_text)
+                      || s.response_text
+                      || 'AWAITING LIVE QUERY RECEIPT — no answer inferred from documentation.';
+      const isAnswer = !!((s.query_answer && s.query_answer.response_text) || s.response_text);
+
+      const answer = document.createElement("div");
+      answer.className = "answer-inline" + (isAnswer ? '' : ' empty');
+      answer.innerHTML = `<div class="lab">Real answer to this query</div>${esc(answerText)}`;
+
+      card.appendChild(logoBox);
+      card.appendChild(nameLabel);
+      card.appendChild(badge);
+      card.appendChild(answer);
+      card.addEventListener("click", () => openDoor(company, lane));
+      gridCol.appendChild(card);
+    });
+
+    const stCol = document.createElement("div");
+    stCol.className = "lane-st" + (lane.layout === "boundary" ? " boundary" : "");
+    stCol.innerHTML = (lane.layout === "boundary") ? renderBoundaryRight(lane) : renderStandardRight(lane);
+
+    body.appendChild(idCol);
+    body.appendChild(gridCol);
+    body.appendChild(stCol);
+
+    laneNode.innerHTML = stripHTML;
+    laneNode.appendChild(body);
+    mainContainer.appendChild(laneNode);
+  });
+
+  visibleCountLabel.textContent = `${visibleNodes} / ${totalNodes}`;
+  wireLogos();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// DRAWER
+// ═══════════════════════════════════════════════════════════════════════
+const drawerNode   = document.getElementById("drawer");
+const backdropNode = document.getElementById("backdrop");
+
+function openDoor(company, lane){
+  const s = stateFor(company, lane.num);
+  const st = s.display_state || s.live_probe_status || 'NOT_OBSERVED';
+  const qa = s.query_answer || {};
+
+  document.getElementById("drawerName").textContent   = company.name;
+  document.getElementById("drawerDomain").textContent = company.domain;
+  document.getElementById("drawerQuery").textContent  = RUN.query || document.getElementById("query").value;
+  document.getElementById("drawerLane").textContent   = `Layer ${lane.num} — ${lane.name}`;
+  document.getElementById("drawerFunding").textContent= lane.funding || "Privately funded / Enterprise";
+  document.getElementById("drawerTheir").textContent  = lane.measure;
+
+  let stHTML;
+  if (lane.layout === "boundary"){
+    const theirQs   = lane.boundary_their_questions.map(q => `<span style="display:block;">${q}</span>`).join("");
+    const realityQs = lane.boundary_reality_questions.map(q => `<span style="display:block;">${q}</span>`).join("");
+    const chainQs   = lane.boundary_since_chain.map(f => `<span style="display:block;">${f}</span>`).join("");
+    stHTML = `
+      <div style="color:#fff;font-weight:700;font-size:14px;margin-bottom:8px;">${lane.boundary_their_intro}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${theirQs}</div>
+      <div style="color:var(--muted);font-size:12.5px;line-height:1.6;margin-top:8px;font-style:italic;">${lane.boundary_their_note}</div>
+      <div style="background:var(--accent);color:#fff;font-weight:900;letter-spacing:.06em;font-size:12px;text-align:center;padding:12px;border-radius:6px;margin:16px 0;">${lane.boundary_divider[0]}<br>${lane.boundary_divider[1]}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${realityQs}</div>
+      <div style="color:#fff;font-weight:700;font-size:14px;margin:16px 0 8px;">${lane.boundary_since_intro}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.7;margin-bottom:8px;">${lane.boundary_since_head}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${chainQs}</div>
+      <div style="border-top:1px solid var(--st-border);padding-top:14px;margin-top:16px;">
+        <div style="font-weight:800;color:#fff;margin-bottom:6px;">${lane.boundary_difference_head}</div>
+        <div style="color:var(--st-q);font-size:13px;line-height:1.65;">${lane.boundary_difference_body}</div>
+      </div>
+    `;
+  } else {
+    stHTML = `
+      <div style="margin-bottom:10px;color:#fff;font-weight:700;font-size:14px;">${lane.st_head}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${lane.st_detail.map(f => `<span style="display:block;">${f}</span>`).join("")}</div>
+      <div style="margin-top:12px;color:var(--accent-2);font-weight:800;font-size:13.5px;letter-spacing:-.005em;">${lane.st_closer}</div>
+    `;
+  }
+  document.getElementById("drawerST").innerHTML = stHTML;
+
+  const answerText = qa.response_text || s.response_text || '';
+  const ansEl = document.getElementById("drawerAnswer");
+  if (answerText) {
+    ansEl.textContent = answerText;
+    ansEl.classList.remove("empty");
+  } else {
+    ansEl.textContent = 'NO LIVE QUERY ANSWER HAS BEEN RECEIPTED YET. This door stays unknown rather than substituting a documentation summary.';
+    ansEl.classList.add("empty");
+  }
+
+  document.getElementById("drawerState").textContent   = st;
+  document.getElementById("drawerStop").textContent    = s.boundary_summary || s.stops_before_field_id || 'UNKNOWN — no supported query boundary yet.';
+  document.getElementById("drawerObserved").textContent= qa.observed_at || s.observed_at || 'NOT OBSERVED';
+  const ev = qa.evidence_refs || s.evidence_refs || [];
+  document.getElementById("drawerEvidence").textContent= Array.isArray(ev) ? (ev.join('\n') || 'NO QUERY-LEVEL RECEIPT') : String(ev || 'NO QUERY-LEVEL RECEIPT');
+  document.getElementById("drawerRaw").textContent     = qa.raw_answer || s.raw_answer || 'NOT OBSERVED';
+  document.getElementById("drawerCeiling").textContent = s.claim_ceiling || qa.claim_ceiling || 'UNKNOWN / NOT OBSERVED';
+
+  document.getElementById("drawerFields").innerHTML = FIELDS.map(([id])=>{
+    const v = fieldState(s, id);
+    return `<div class="seg ${clsOf(v)}" title="${id} · ${esc(v)}">${lblOf(v)}</div>`;
+  }).join('');
+
+  document.getElementById("drawerLink").innerHTML =
+    `<a href="https://${esc(company.domain)}" target="_blank" rel="noopener" style="color:var(--accent-2);text-decoration:none;font-weight:700;">https://${esc(company.domain)} ↗</a>`;
+
+  drawerNode.classList.add("open");
+  backdropNode.classList.add("open");
+}
+function closeDrawer(){
+  drawerNode.classList.remove("open");
+  backdropNode.classList.remove("open");
+}
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+backdropNode.addEventListener("click", closeDrawer);
+
+// ═══════════════════════════════════════════════════════════════════════
+// FILTERS
+// ═══════════════════════════════════════════════════════════════════════
+document.querySelectorAll(".chip[data-filter]").forEach((chip) => {
+  chip.addEventListener("click", (e) => {
+    document.querySelectorAll(".chip[data-filter]").forEach((c) => c.classList.remove("active"));
+    e.currentTarget.classList.add("active");
+    activeFilter = e.currentTarget.getAttribute("data-filter");
+    compileLandscapeLayout();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+// REPLAY — honest query handler. Does not execute live queries.
+// ═══════════════════════════════════════════════════════════════════════
+function setQuery(){
+  const q = document.getElementById("query").value.trim();
+  const coordEl = document.getElementById("queryCoord");
+  const isRegistered = PRE_REGISTERED_QUERIES.includes(q);
+
+  if (!isRegistered){
+    coordEl.textContent = `NOT A PRE-REGISTERED CASE · "${q}" · This instrument replays receipts. It does not yet execute live queries. No receipt exists for this query.`;
+    coordEl.classList.add("warn");
+    return;
+  }
+
+  RUN.query = q;
+  coordEl.textContent = `PRE-REGISTERED CASE · "${q}" · every door below answers this same request or reports NOT OBSERVED`;
+  coordEl.classList.remove("warn");
+  renderAll();
+  document.querySelector("main").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function toggleAll(){
+  document.body.classList.toggle("openAll");
+  const btn = document.getElementById("openAllBtn");
+  btn.textContent = document.body.classList.contains("openAll") ? "Close all doors" : "Open all doors";
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// OPERATOR-ONLY — not linked from public UI. Available via console.
+// ═══════════════════════════════════════════════════════════════════════
+function openImport(){ document.getElementById("modal").classList.add("open"); }
+function closeImport(){ document.getElementById("modal").classList.remove("open"); }
+function applyJson(){
+  try {
+    const d = JSON.parse(document.getElementById("jsonInput").value);
+    RUN = { ...RUN, ...d };
+    if (d.query) document.getElementById("query").value = d.query;
+    renderAll();
+    closeImport();
+  } catch(e){ alert("Invalid JSON: " + e.message); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// RENDER ALL
+// ═══════════════════════════════════════════════════════════════════════
+function renderAll(){
+  renderRuler();
+  compileLandscapeLayout();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// SEED IMPORT SCHEMA
+// ═══════════════════════════════════════════════════════════════════════
+document.getElementById("jsonInput").value = JSON.stringify({
+  "_schema": "QUERY_MARKET_INSTRUMENT_RUN_V1",
+  "query": PRE_REGISTERED_QUERIES[0],
+  "reality_fields": {},
+  "lanes": {},
+  "companies": {
+    "01::Profound": {
+      "display_state": "unknown",
+      "fields": {},
+      "query_answer": {
+        "response_text": "",
+        "raw_answer": "",
+        "observed_at": "",
+        "evidence_refs": [],
+        "claim_ceiling": ""
+      },
+      "boundary_summary": ""
+    }
+  },
+  "proof": { "result_state": "AWAITING FULL QUERY TRACE" }
+}, null, 2);
+
+// ═══════════════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════════════
+renderAll();
+</script>
+</body>
+</html>
