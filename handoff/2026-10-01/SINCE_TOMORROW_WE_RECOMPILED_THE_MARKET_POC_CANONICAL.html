@@ -997,4 +997,241 @@ function compileLandscapeLayout(){
     idCol.innerHTML = `
       <span class="lane-num">LAYER ${lane.num}</span>
       <h2 class="lane-name">${esc(lane.name)}</h2>
-      <span class="lane-stat">${esc(lane.stat)}</span>
+      <span class="lane-stat">${esc(lane.stat)}</span>      <span class="lane-receipt-status${isPOC ? ' poc' : ''}">${laneReceiptStatus(lane)}</span>
+      <span class="lane-section-label">WHERE THEIR MAP ENDS</span>
+      <p class="lane-measure">${esc(lane.measure)}</p>
+    `;
+
+    const gridCol = document.createElement("div");
+    gridCol.className = "lane-grid";
+
+    lane.companies.forEach((company) => {
+      const s = stateFor(company, lane.num);
+      const st = s.display_state || s.live_probe_status || 'unknown';
+      const cCls = clsOf(st);
+
+      const card = document.createElement("div");
+      card.className = "card " + cCls;
+
+      const logoBox = document.createElement("div");
+      logoBox.className = "logo-box";
+      logoBox.innerHTML = renderLogoNode(company);
+
+      const nameLabel = document.createElement("span");
+      nameLabel.className = "card-name";
+      nameLabel.textContent = company.name;
+
+      const badge = document.createElement("span");
+      badge.className = "card-state-badge";
+      badge.textContent = (st === 'unknown') ? 'NOT OBSERVED' : st.toUpperCase();
+
+      const answerText = (s.query_answer && s.query_answer.response_text)
+                      || s.response_text
+                      || 'AWAITING LIVE QUERY RECEIPT — no answer inferred from documentation.';
+      const isAnswer = !!((s.query_answer && s.query_answer.response_text) || s.response_text);
+
+      const answer = document.createElement("div");
+      answer.className = "answer-inline" + (isAnswer ? '' : ' empty');
+      answer.innerHTML = `<div class="lab">Real answer to this query</div>${esc(answerText)}`;
+
+      card.appendChild(logoBox);
+      card.appendChild(nameLabel);
+      card.appendChild(badge);
+      card.appendChild(answer);
+      card.addEventListener("click", () => openDoor(company, lane));
+      gridCol.appendChild(card);
+    });
+
+    const stCol = document.createElement("div");
+    stCol.className = "lane-st" + (lane.layout === "boundary" ? " boundary" : "");
+    stCol.innerHTML = (lane.layout === "boundary") ? renderBoundaryRight(lane) : renderStandardRight(lane);
+
+    body.appendChild(idCol);
+    body.appendChild(gridCol);
+    body.appendChild(stCol);
+
+    laneNode.innerHTML = stripHTML;
+    laneNode.appendChild(body);
+    mainContainer.appendChild(laneNode);
+  });
+
+  visibleCountLabel.textContent = `${visibleNodes} / ${totalNodes}`;
+  wireLogos();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// DRAWER
+// ═══════════════════════════════════════════════════════════════════════
+const drawerNode   = document.getElementById("drawer");
+const backdropNode = document.getElementById("backdrop");
+
+function openDoor(company, lane){
+  const s = stateFor(company, lane.num);
+  const st = s.display_state || s.live_probe_status || 'NOT_OBSERVED';
+  const qa = s.query_answer || {};
+
+  document.getElementById("drawerName").textContent   = company.name;
+  document.getElementById("drawerDomain").textContent = company.domain;
+  document.getElementById("drawerQuery").textContent  = RUN.query || document.getElementById("query").value;
+  document.getElementById("drawerLane").textContent   = `Layer ${lane.num} — ${lane.name}`;
+  document.getElementById("drawerFunding").textContent= lane.funding || "Privately funded / Enterprise";
+  document.getElementById("drawerTheir").textContent  = lane.measure;
+
+  let stHTML;
+  if (lane.layout === "boundary"){
+    const theirQs   = lane.boundary_their_questions.map(q => `<span style="display:block;">${q}</span>`).join("");
+    const realityQs = lane.boundary_reality_questions.map(q => `<span style="display:block;">${q}</span>`).join("");
+    const chainQs   = lane.boundary_since_chain.map(f => `<span style="display:block;">${f}</span>`).join("");
+    stHTML = `
+      <div style="color:#fff;font-weight:700;font-size:14px;margin-bottom:8px;">${lane.boundary_their_intro}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${theirQs}</div>
+      <div style="color:var(--muted);font-size:12.5px;line-height:1.6;margin-top:8px;font-style:italic;">${lane.boundary_their_note}</div>
+      <div style="background:var(--accent);color:#fff;font-weight:900;letter-spacing:.06em;font-size:12px;text-align:center;padding:12px;border-radius:6px;margin:16px 0;">${lane.boundary_divider[0]}<br>${lane.boundary_divider[1]}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${realityQs}</div>
+      <div style="color:#fff;font-weight:700;font-size:14px;margin:16px 0 8px;">${lane.boundary_since_intro}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.7;margin-bottom:8px;">${lane.boundary_since_head}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${chainQs}</div>
+      <div style="border-top:1px solid var(--st-border);padding-top:14px;margin-top:16px;">
+        <div style="font-weight:800;color:#fff;margin-bottom:6px;">${lane.boundary_difference_head}</div>
+        <div style="color:var(--st-q);font-size:13px;line-height:1.65;">${lane.boundary_difference_body}</div>
+      </div>
+    `;
+  } else {
+    stHTML = `
+      <div style="margin-bottom:10px;color:#fff;font-weight:700;font-size:14px;">${lane.st_head}</div>
+      <div style="color:var(--st-q);font-size:13px;line-height:1.75;">${lane.st_detail.map(f => `<span style="display:block;">${f}</span>`).join("")}</div>
+      <div style="margin-top:12px;color:var(--accent-2);font-weight:800;font-size:13.5px;letter-spacing:-.005em;">${lane.st_closer}</div>
+    `;
+  }
+  document.getElementById("drawerST").innerHTML = stHTML;
+
+  const answerText = qa.response_text || s.response_text || '';
+  const ansEl = document.getElementById("drawerAnswer");
+  if (answerText) {
+    ansEl.textContent = answerText;
+    ansEl.classList.remove("empty");
+  } else {
+    ansEl.textContent = 'NO LIVE QUERY ANSWER HAS BEEN RECEIPTED YET. This door stays unknown rather than substituting a documentation summary.';
+    ansEl.classList.add("empty");
+  }
+
+  document.getElementById("drawerState").textContent   = st;
+  document.getElementById("drawerStop").textContent    = s.boundary_summary || s.stops_before_field_id || 'UNKNOWN — no supported query boundary yet.';
+  document.getElementById("drawerObserved").textContent= qa.observed_at || s.observed_at || 'NOT OBSERVED';
+  const ev = qa.evidence_refs || s.evidence_refs || [];
+  document.getElementById("drawerEvidence").textContent= Array.isArray(ev) ? (ev.join('\n') || 'NO QUERY-LEVEL RECEIPT') : String(ev || 'NO QUERY-LEVEL RECEIPT');
+  document.getElementById("drawerRaw").textContent     = qa.raw_answer || s.raw_answer || 'NOT OBSERVED';
+  document.getElementById("drawerCeiling").textContent = s.claim_ceiling || qa.claim_ceiling || 'UNKNOWN / NOT OBSERVED';
+
+  document.getElementById("drawerFields").innerHTML = FIELDS.map(([id])=>{
+    const v = fieldState(s, id);
+    return `<div class="seg ${clsOf(v)}" title="${id} · ${esc(v)}">${lblOf(v)}</div>`;
+  }).join('');
+
+  document.getElementById("drawerLink").innerHTML =
+    `<a href="https://${esc(company.domain)}" target="_blank" rel="noopener" style="color:var(--accent-2);text-decoration:none;font-weight:700;">https://${esc(company.domain)} ↗</a>`;
+
+  drawerNode.classList.add("open");
+  backdropNode.classList.add("open");
+}
+function closeDrawer(){
+  drawerNode.classList.remove("open");
+  backdropNode.classList.remove("open");
+}
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+backdropNode.addEventListener("click", closeDrawer);
+
+// ═══════════════════════════════════════════════════════════════════════
+// FILTERS
+// ═══════════════════════════════════════════════════════════════════════
+document.querySelectorAll(".chip[data-filter]").forEach((chip) => {
+  chip.addEventListener("click", (e) => {
+    document.querySelectorAll(".chip[data-filter]").forEach((c) => c.classList.remove("active"));
+    e.currentTarget.classList.add("active");
+    activeFilter = e.currentTarget.getAttribute("data-filter");
+    compileLandscapeLayout();
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+// REPLAY — honest query handler. Does not execute live queries.
+// ═══════════════════════════════════════════════════════════════════════
+function setQuery(){
+  const q = document.getElementById("query").value.trim();
+  const coordEl = document.getElementById("queryCoord");
+  const isRegistered = PRE_REGISTERED_QUERIES.includes(q);
+
+  if (!isRegistered){
+    coordEl.textContent = `NOT A PRE-REGISTERED CASE · "${q}" · This instrument replays receipts. It does not yet execute live queries. No receipt exists for this query.`;
+    coordEl.classList.add("warn");
+    return;
+  }
+
+  RUN.query = q;
+  coordEl.textContent = `PRE-REGISTERED CASE · "${q}" · every door below answers this same request or reports NOT OBSERVED`;
+  coordEl.classList.remove("warn");
+  renderAll();
+  document.querySelector("main").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function toggleAll(){
+  document.body.classList.toggle("openAll");
+  const btn = document.getElementById("openAllBtn");
+  btn.textContent = document.body.classList.contains("openAll") ? "Close all doors" : "Open all doors";
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// OPERATOR-ONLY — not linked from public UI. Available via console.
+// ═══════════════════════════════════════════════════════════════════════
+function openImport(){ document.getElementById("modal").classList.add("open"); }
+function closeImport(){ document.getElementById("modal").classList.remove("open"); }
+function applyJson(){
+  try {
+    const d = JSON.parse(document.getElementById("jsonInput").value);
+    RUN = { ...RUN, ...d };
+    if (d.query) document.getElementById("query").value = d.query;
+    renderAll();
+    closeImport();
+  } catch(e){ alert("Invalid JSON: " + e.message); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// RENDER ALL
+// ═══════════════════════════════════════════════════════════════════════
+function renderAll(){
+  renderRuler();
+  compileLandscapeLayout();
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// SEED IMPORT SCHEMA
+// ═══════════════════════════════════════════════════════════════════════
+document.getElementById("jsonInput").value = JSON.stringify({
+  "_schema": "QUERY_MARKET_INSTRUMENT_RUN_V1",
+  "query": PRE_REGISTERED_QUERIES[0],
+  "reality_fields": {},
+  "lanes": {},
+  "companies": {
+    "01::Profound": {
+      "display_state": "unknown",
+      "fields": {},
+      "query_answer": {
+        "response_text": "",
+        "raw_answer": "",
+        "observed_at": "",
+        "evidence_refs": [],
+        "claim_ceiling": ""
+      },
+      "boundary_summary": ""
+    }
+  },
+  "proof": { "result_state": "AWAITING FULL QUERY TRACE" }
+}, null, 2);
+
+// ═══════════════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════════════
+renderAll();
+</script>
+</body>
+</html>
