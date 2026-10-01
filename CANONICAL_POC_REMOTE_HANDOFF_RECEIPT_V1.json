@@ -1,0 +1,18 @@
+{
+  "receipt_type": "CANONICAL_POC_REMOTE_HANDOFF_RECEIPT_V1",
+  "repository": "shanluchapieme/sincetmw-proof",
+  "branch": "handoff/canonical-poc-2026-10-01",
+  "source": {
+    "commit": "1f921ab0fd3406f3c34141c0caf1939defa22763",
+    "path": "handoff/2026-10-01/SINCE_TOMORROW_WE_RECOMPILED_THE_MARKET_POC_CANONICAL.html",
+    "github_blob_sha1": "aa94a194c3ad53993a1e573ca6bc5404ea93ad96",
+    "bytes": 80663,
+    "sha256": "86681ceb02fa11418e110b915596956e0350d4d12f2939450f7c66e09398f9d9"
+  },
+  "staged": {
+    "path": "SINCE_TOMORROW_WE_RECOMPILED_THE_MARKET_POC_CANONICAL.html",
+    "commit_sha": "87c451005723b74edc0de9e64b3ccfd75ff2aec8"
+  },
+  "intended_local_target": "C:\\SinceTomorrow\\since-tomorrow-os\\SINCE_TOMORROW_WE_RECOMPILED_THE_MARKET_POC_CANONICAL.html",
+  "note": "Remote handoff only. Local incumbent must be preserved before promotion."
+}
