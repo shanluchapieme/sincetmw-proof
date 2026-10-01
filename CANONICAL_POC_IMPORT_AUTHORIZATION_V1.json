@@ -1,0 +1,22 @@
+{
+  "receipt_type": "CANONICAL_POC_IMPORT_AUTHORIZATION_V1",
+  "authorization_scope": "ONE_TIME_ARTIFACT_IMPORT_ONLY",
+  "source_repository": "shanluchapieme/sincetmw-proof",
+  "source_branch": "handoff/canonical-poc-2026-10-01",
+  "source_commit": "74f1871919ebe6902c20444c2d2bb5900262e0ec",
+  "source_path": "SINCE_TOMORROW_WE_RECOMPILED_THE_MARKET_POC_CANONICAL.html",
+  "source_original_commit": "1f921ab0fd3406f3c34141c0caf1939defa22763",
+  "expected_bytes": 80663,
+  "expected_sha256": "86681ceb02fa11418e110b915596956e0350d4d12f2939450f7c66e09398f9d9",
+  "intended_local_target": "C:\\SinceTomorrow\\since-tomorrow-os\\SINCE_TOMORROW_WE_RECOMPILED_THE_MARKET_POC_CANONICAL.html",
+  "preserve_existing_target_before_promotion": true,
+  "authorization_basis": "User explicitly requested the remote GitHub handoff in this conversation for the purpose of getting the verified canonical POC onto the local since-tomorrow-os machine while away from the desk.",
+  "trust_boundary": [
+    "This authorizes only the exact file/commit/hash above.",
+    "This does not grant blanket trust to the shanluchapieme account, repository, branch, or future content.",
+    "This does not authorize importing any other file.",
+    "This does not authorize rewriting since-tomorrow-os history.",
+    "The incumbent local file must be preserved before promotion.",
+    "Hash/size verification remains mandatory after local transfer."
+  ]
+}
